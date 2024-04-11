@@ -44,5 +44,7 @@ public class AddressServiceExample
         var addressListResult = await _client.AddressList(new AddressListRequest());
         Console.WriteLine($"AddressList StatusCode = {addressListResult.StatusCode}, items = {addressListResult?.Result?.Data?.Count}");
         */
+
+
     }
 }

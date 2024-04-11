@@ -32,6 +32,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Balikuj.Client
@@ -42,6 +43,7 @@ namespace Balikuj.Client
         private readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions() { 
             PropertyNameCaseInsensitive = true,
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            Converters = { new JsonStringEnumConverter() }
         };
 
 
@@ -272,13 +274,88 @@ namespace Balikuj.Client
         }
 
 
+
+
+        public async Task<ApiResult<WebhookDetail>> WebhookGet(int id)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest($"Webhook/{id}", HttpMethod.Get);
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<WebhookDetail>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+
+        public async Task<ApiResult<WebhookCreateResponse>> WebhookCreate(WebhookCreate model)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("Webhook", HttpMethod.Post);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<WebhookCreateResponse>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+
+        public async Task<ApiResult<bool>> WebhookUpdate(WebhookUpdateModel model)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("Webhook", HttpMethod.Put);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<bool>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+
+        public async Task<ApiResult<bool>> WebhookDelete(int id)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest($"Webhook/{id}", HttpMethod.Delete);
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStringAsync();
+            var response = JsonSerializer.Deserialize<ApiResult<bool>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
         /*
-         WebhookList
-         WebhookGet
-         WebhookCreate
+         WebhookList -
+         WebhookGet -
+         WebhookCreate -
          WebhookUpdate
          WebhookDelete
-         WebhookEvents
+         WebhookEvents -
          */
         #endregion
 
