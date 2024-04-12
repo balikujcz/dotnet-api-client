@@ -84,11 +84,11 @@ public class WebhookServiceExample
         /////////////////////////////
         /// Webhook delete
         ///////////////////////////////
-        
+        /*
         Console.WriteLine("Deleting webhook ...");
         var webhookDeleteResult = await _client.WebhookDelete(4);
         Console.WriteLine($"WebhookUpdate StatusCode = {webhookDeleteResult.StatusCode}, result = {webhookDeleteResult?.Result}");
-        
+        */
 
 
 

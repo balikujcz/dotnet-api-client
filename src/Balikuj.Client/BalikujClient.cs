@@ -26,6 +26,11 @@ using Balikuj.Client.Configuration;
 using Balikuj.Client.Exceptions;
 using Balikuj.Client.Models.Account;
 using Balikuj.Client.Models.Addresses;
+using Balikuj.Client.Models.Application;
+using Balikuj.Client.Models.Carrier;
+using Balikuj.Client.Models.EmailAccount;
+using Balikuj.Client.Models.EmailTemplate;
+using Balikuj.Client.Models.Label;
 using Balikuj.Client.Models.Webhooks;
 using Balikuj.Client.Results;
 using System;
@@ -79,6 +84,13 @@ namespace Balikuj.Client
             _apiKey = apiKey;
         }
 
+
+
+
+        #endregion
+
+
+        #region Account
 
         /// <summary>
         /// Login to Balikuj API with specified credentials. If you have existing apiKey, you can use it to authenticate.
@@ -159,6 +171,7 @@ namespace Balikuj.Client
             return response;
         }
 
+
         #endregion
 
 
@@ -235,7 +248,7 @@ namespace Balikuj.Client
 
         #region Webhook
         
-        public async Task<ApiResult<AddressListResponse>> WebhookList()
+        public async Task<ApiResult<WebhookListResponse>> WebhookList()
         {
             if (string.IsNullOrWhiteSpace(_apiKey))
                 throw new BalikujException("Account is not logged in, login is required");
@@ -246,7 +259,7 @@ namespace Balikuj.Client
             var httpResponse = await _httpClient.SendAsync(httpRequest);
 
             var responseStream = await httpResponse.Content.ReadAsStreamAsync();
-            var response = await JsonSerializer.DeserializeAsync<ApiResult<AddressListResponse>>(responseStream, _jsonSerializerOptions);
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<WebhookListResponse>>(responseStream, _jsonSerializerOptions);
 
             response.StatusCode = (int)httpResponse.StatusCode;
             return response;
@@ -349,16 +362,382 @@ namespace Balikuj.Client
         }
 
 
-        /*
-         WebhookList -
-         WebhookGet -
-         WebhookCreate -
-         WebhookUpdate
-         WebhookDelete
-         WebhookEvents -
-         */
         #endregion
 
+
+        #region Application
+
+
+        public async Task<ApiResult<ApplicationListResponse>> ApplicationList()
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("Application/Find", HttpMethod.Post);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(new { }), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<ApplicationListResponse>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<ApplicationModelResponse>> ApplicationGet(int id)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest($"Application/{id}", HttpMethod.Get);
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<ApplicationModelResponse>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+
+        public async Task<ApiResult<IEnumerable<ApplicationTypeModel>>> ApplicationTypes()
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("Application/Types", HttpMethod.Get);
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<IEnumerable<ApplicationTypeModel>>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+
+
+
+
+
+        #endregion
+
+
+        #region Carrier
+
+
+        public async Task<ApiResult<IEnumerable<CarrierListResponse>>> CarrierList()
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("Carrier/Find", HttpMethod.Post);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(new { }), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<IEnumerable<CarrierListResponse>>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<IEnumerable<CarrierServiceModel>>> CarrierServices(CarrierServiceSearchModel model)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("Carrier/Services", HttpMethod.Post);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<IEnumerable<CarrierServiceModel>>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<IEnumerable<CarrierManipulationUnit>>> CarrierManipulation(CarrierManipulationUnitSearchModel model)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("Carrier/ManipulationUnits", HttpMethod.Post);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<IEnumerable<CarrierManipulationUnit>>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        #endregion
+
+
+        #region EmailAccount
+
+        public async Task<ApiResult<EmailAccountListModel>> EmailList()
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("EmailAccount/Find", HttpMethod.Post);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(new { }), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<EmailAccountListModel>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+        public async Task<ApiResult<bool>> EmailMarkAsDefault(int id)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest($"EmailAccount/MarkAsDefaultEmail/{id}", HttpMethod.Post);
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<bool>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<bool>> EmailCreate(EmailAccount model)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("EmailAccount", HttpMethod.Post);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<bool>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<bool>> EmailUpdate(EmailAccount model)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("EmailAccount", HttpMethod.Put);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<bool>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<bool>> EmailDelete(int id)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest($"EmailAccount/{id}", HttpMethod.Delete);
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<bool>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<bool>> EmailSendTest(EmailAccountTestModel model)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("EmailAccount/SendTestEmail", HttpMethod.Post);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStringAsync();
+            var response = JsonSerializer.Deserialize<ApiResult<bool>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+
+
+
+        #endregion
+
+
+        #region EmailTemplate
+
+        public async Task<ApiResult<MessageTemplateListResponse>> EmailTemplateList()
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("EmailTemplate/Find", HttpMethod.Post);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(new { }), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<MessageTemplateListResponse>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        
+        public async Task<ApiResult<bool>> EmailTemplateUpdate(MessageTemplate model)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("EmailTemplate", HttpMethod.Put);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<bool>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<bool>> EmailTemplateCreate(MessageTemplate model)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("EmailTemplate", HttpMethod.Post);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<bool>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<bool>> EmailTemplateDelete(int id)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest($"EmailTemplate/{id}", HttpMethod.Delete);
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<bool>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+        // TODO 
+        /*
+        public async Task<ApiResult<int>> EmailTemplateCopy(MessageTemplate model)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("EmailTemplate/CopyTemplate", HttpMethod.Post);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<int>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+        
+
+
+        public async Task<ApiResult<int>> EmailTemplateUploadAttachment(MessageTemplate model)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("EmailTemplate/CopyTemplate", HttpMethod.Post);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<int>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+        */
+
+
+        #endregion
+
+
+        #region Label
+        /*
+        public async Task<ApiResult<Label>> LabelNotPrinted()
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("Label/NotPrinted", HttpMethod.Post);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(new { }), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<Label>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+        */
+        #endregion
 
 
         #region Private Methods

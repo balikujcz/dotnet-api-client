@@ -18,6 +18,11 @@ public class Program
 
                 services.AddSingleton<AddressServiceExample>();
                 services.AddSingleton<WebhookServiceExample>();
+                services.AddSingleton<ApplicationServiceExample>();
+                services.AddSingleton<CarrierServiceExample>();
+                services.AddSingleton<EmailAccountServiceExample>();
+                services.AddSingleton<EmailTemplateServiceExample>();
+                services.AddSingleton<LabelServiceExample>();
             })
             .Build();
 
@@ -27,7 +32,22 @@ public class Program
         //await host.Services.GetService<AddressServiceExample>()!.RunAsync();
 
         // Webhook example
-        await host.Services.GetService<WebhookServiceExample>()!.RunAsync();
+        //await host.Services.GetService<WebhookServiceExample>()!.RunAsync();
+
+        // Application example
+        //await host.Services.GetService<ApplicationServiceExample>()!.RunAsync();
+
+        // Carrier example
+        //await host.Services.GetService<CarrierServiceExample>()!.RunAsync();
+
+        // Email account example
+        //await host.Services.GetService<EmailAccountServiceExample>()!.RunAsync();
+
+        // Email template example
+        //await host.Services.GetService<EmailTemplateServiceExample>()!.RunAsync();
+
+        // Label example
+        await host.Services.GetService<LabelServiceExample>()!.RunAsync();
 
         //await host.RunAsync();
 
