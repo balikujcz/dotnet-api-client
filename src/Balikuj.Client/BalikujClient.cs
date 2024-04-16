@@ -31,6 +31,7 @@ using Balikuj.Client.Models.Carrier;
 using Balikuj.Client.Models.EmailAccount;
 using Balikuj.Client.Models.EmailTemplate;
 using Balikuj.Client.Models.Label;
+using Balikuj.Client.Models.Order;
 using Balikuj.Client.Models.Webhooks;
 using Balikuj.Client.Results;
 using System;
@@ -422,9 +423,36 @@ namespace Balikuj.Client
 
 
 
+        #endregion
 
 
+        #region Labels
 
+        public async Task<ApiResult<List<Label>>> LabelNotPrinted(LabelType labelType)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            HttpRequestMessage httpRequest;
+
+            if (labelType == LabelType.Zpl)
+            {
+                httpRequest = CreateRequest("Label/NotPrinted", HttpMethod.Post, labelType.ToString());
+
+            }
+            else
+            {
+                httpRequest = CreateRequest("Order/Pdf", HttpMethod.Post);
+            }
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<List<Label>>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
 
         #endregion
 
@@ -740,14 +768,96 @@ namespace Balikuj.Client
         #endregion
 
 
+        #region Order
+
+        public async Task<ApiResult<OrderListModel>> OrderList()
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("Order/Find", HttpMethod.Post);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(new { }), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<OrderListModel>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<Order>> OrderGet(int id)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest($"Order/{id}", HttpMethod.Get);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(new { }), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<Order>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        
+        public async Task<ApiResult<List<OrderUpdateResult>>> OrderUpdate(OrderUpdateRequest model)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("Order", HttpMethod.Put);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<List<OrderUpdateResult>>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+
+        public async Task<ApiResult<OrderCreatePackagesResult>> OrderCreatePackages(OrderCreatePackageRequest model)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("Order/CreatePackages", HttpMethod.Post);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<OrderCreatePackagesResult>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        #endregion
+
+
         #region Private Methods
 
-        private HttpRequestMessage CreateRequest(string endpoint, HttpMethod method)
+        private HttpRequestMessage CreateRequest(string endpoint, HttpMethod method, string query = null)
         {
             if (string.IsNullOrWhiteSpace(_apiKey))
                 throw new BalikujException("Login is required to send data");
 
             var requestUrl = GetApiUrl(endpoint);
+
+            if (!string.IsNullOrEmpty(query))
+                requestUrl += $"?{query}";
 
             var request = new HttpRequestMessage(method, requestUrl);
             request.Headers.Add(BalikujSettings.ApiHeaderName, _apiKey);

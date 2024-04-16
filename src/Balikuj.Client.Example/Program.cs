@@ -23,6 +23,7 @@ public class Program
                 services.AddSingleton<EmailAccountServiceExample>();
                 services.AddSingleton<EmailTemplateServiceExample>();
                 services.AddSingleton<LabelServiceExample>();
+                services.AddSingleton<OrderServiceExample>();
             })
             .Build();
 
@@ -48,6 +49,9 @@ public class Program
 
         // Label example
         await host.Services.GetService<LabelServiceExample>()!.RunAsync();
+
+        // Order example
+        //await host.Services.GetService<OrderServiceExample>()!.RunAsync();
 
         //await host.RunAsync();
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Balikuj.Client.Models.Label;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,9 +24,11 @@ namespace Balikuj.Client.Example.Services
             /// Label not printed
             /// /////////////////////
 
+            var enumType = LabelType.Zpl;
+
             Console.WriteLine("Getting not printed labels accounts ...");
-            var notPrinted = await _client.LabelNotPrinted();
-            Console.WriteLine($"LabelNotPrinted StatusCode = {notPrinted.StatusCode}, count = {notPrinted?.Result?.LabelsCount}");
+            var notPrinted = await _client.LabelNotPrinted(enumType);
+            Console.WriteLine($"LabelNotPrinted StatusCode = {notPrinted.StatusCode}, Count = {notPrinted?.Result?.Count}");
         }
     }
 }
