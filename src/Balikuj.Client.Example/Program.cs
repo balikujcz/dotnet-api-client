@@ -24,6 +24,8 @@ public class Program
                 services.AddSingleton<EmailTemplateServiceExample>();
                 services.AddSingleton<LabelServiceExample>();
                 services.AddSingleton<OrderServiceExample>();
+                services.AddSingleton<PackageServiceExample>();
+                services.AddSingleton<PickingServiceExample>();
             })
             .Build();
 
@@ -48,10 +50,16 @@ public class Program
         //await host.Services.GetService<EmailTemplateServiceExample>()!.RunAsync();
 
         // Label example
-        await host.Services.GetService<LabelServiceExample>()!.RunAsync();
+        //await host.Services.GetService<LabelServiceExample>()!.RunAsync();
 
         // Order example
         //await host.Services.GetService<OrderServiceExample>()!.RunAsync();
+
+        // Package example
+        //await host.Services.GetService<PackageServiceExample>()!.RunAsync();
+
+        // Picking example
+        await host.Services.GetService<PickingServiceExample>()!.RunAsync();
 
         //await host.RunAsync();
 

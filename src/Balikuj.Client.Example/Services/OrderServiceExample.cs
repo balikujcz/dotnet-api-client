@@ -97,6 +97,198 @@ namespace Balikuj.Client.Example.Services
             Console.WriteLine($"OrderCreatePackages StatusCode = {order.StatusCode}, OrdersCount = {order?.Result?.Orders.Count}");
             */
 
+            ////////////////////////
+            /// Order item update
+            /////////////////////////
+            ///
+
+            /*
+            int desiredId = 1;
+
+            var items = new OrderItemUpdateRequest()
+            {
+                // create new list of ints
+                Items = new List<int>() { 43, 52},
+                Resolved = true,
+            };
+
+
+            Console.WriteLine("Updating order items ...");
+            var order = await _client.OrderItemUpdate(desiredId, items);
+            Console.WriteLine($"OrderItemUpdate StatusCode = {order.StatusCode}, Count = {order?.Result?.Count()}");
+            */
+
+
+            ////////////////////////
+            /// Order status get
+            /////////////////////////
+            ///
+
+            /*
+            Console.WriteLine("Getting all order statuses ...");
+            var order = await _client.OrderStatus();
+            Console.WriteLine($"OrderStatus StatusCode = {order.StatusCode}, Count = {order?.Result?.Count()}");
+            */
+
+
+            ////////////////////////
+            /// Order status get by id
+            /////////////////////////
+            ///
+
+            /*
+            int desiredId = 1;
+            
+            Console.WriteLine("Getting order status by id ...");
+            var order = await _client.OrderStatusGet(desiredId);
+            Console.WriteLine($"OrderStatusGet StatusCode = {order.StatusCode}, Id = {order?.Result?.Id}");
+            */
+
+
+            ////////////////////////
+            /// Order status update
+            /////////////////////////
+            ///
+
+            /*
+            int desiredId = 1;
+
+            var updateModel = new OrderStatusUpdateRequest
+            {
+                SourceId = new string[] { "1" },
+                Name = "Test",
+                TextColor = "#000000",
+                BackgroundColor = "#FFFFFF",
+                IsSystem = false,
+                DisplayOrder = 1
+            };
+            
+            Console.WriteLine("Updating order status ...");
+            var order = await _client.OrderStatusUpdate(desiredId, updateModel);
+            Console.WriteLine($"OrderStatusUpdate StatusCode = {order.StatusCode}, Id = {order?.Result?.Id}");
+            */
+
+
+            ////////////////////////
+            /// Order status create
+            /////////////////////////
+            ///
+
+            /*
+            var createModel = new OrderStatusCreateRequest
+            {
+                Name = "Test",
+                TextColor = "#000000",
+                BackgroundColor = "#FFFFFF",
+                SourceId = new string[] { "1" },
+                DisplayOrder = 1000
+            };
+            
+            Console.WriteLine("Creating order status ...");
+            var order = await _client.OrderStatusCreate(createModel);
+            Console.WriteLine($"OrderStatusCreate StatusCode = {order.StatusCode}, Id = {order?.Result?.Id}");
+            */
+
+
+            ////////////////////////
+            /// Order status delete
+            /////////////////////////
+            ///
+
+            /*
+            int desiredId = 1;
+            
+            Console.WriteLine("Deleting order status ...");
+            var order = await _client.OrderStatusDelete(desiredId);
+            Console.WriteLine($"OrderStatusDelete StatusCode = {order.StatusCode}, Success = {order?.Result}");
+            */
+
+
+            ////////////////////////
+            /// Order payment method
+            /////////////////////////
+            ///
+
+            /*
+            Console.WriteLine("Getting payment methods ...");
+            var order = await _client.OrderPaymentMethodList();
+            Console.WriteLine($"OrderPaymentMethod StatusCode = {order.StatusCode}, Count = {order?.Result?.Count()}");
+            */
+            
+
+            ////////////////////////////
+            /// Order payment method get
+            ////////////////////////////
+            ///
+
+            /*
+            int desiredId = 1;
+            
+            Console.WriteLine("Getting the payment method ...");
+            var orderPaymentMethods = await _client.OrderPaymentMethodGet(desiredId);
+            Console.WriteLine($"OrderPaymentMethod StatusCode = {orderPaymentMethods.StatusCode}, Id = {orderPaymentMethods?.Result?.Id}");
+            */
+
+
+            ///////////////////////////////
+            /// Order payment method update
+            ///////////////////////////////
+            ///
+
+            /*
+            int desiredId = 2;
+
+            var updateModel = new OrderPaymentUpdateRequest
+            {
+                Name = "Test",
+                DisplayOrder = 1000,
+                IsSystem = false,
+                SourceId = new string[] { "1" },
+                ImageUrl = "https://www.google.com",
+                
+            };
+            
+            Console.WriteLine("Updating the payment method ...");
+            var orderPaymentMethods = await _client.OrderPaymentMethodUpdate(desiredId, updateModel);
+            Console.WriteLine($"OrderPaymentMethodUpdate StatusCode = {orderPaymentMethods.StatusCode}, Id = {orderPaymentMethods?.Result?.Id}");
+            */
+
+
+
+            ///////////////////////////////
+            /// Order payment method create
+            ///////////////////////////////
+            ///
+            /* RETURN ID?
+            var updateModel = new OrderPaymentCreateRequest
+            {
+                Name = "Test",
+                DisplayOrder = 1000,
+                IsSystem = false,
+                SourceId = new string[] { "1" },
+                ImageUrl = "https://www.google.com",
+                
+            };
+            
+            Console.WriteLine("Creating the payment method ...");
+            var orderPaymentMethods = await _client.OrderPaymentMethodCreate(updateModel);
+            Console.WriteLine($"OrderPaymentMethodCreate StatusCode = {orderPaymentMethods.StatusCode}, Id = {orderPaymentMethods?.Result?.Id}");
+            */
+
+            ////////////////////////////
+            /// Order payment method delete
+            ////////////////////////////
+            ///
+
+            /*
+            int desiredId = 8;
+            
+            Console.WriteLine("Deleting the payment method ...");
+            var orderPaymentMethods = await _client.OrderPaymentMethodDelete(desiredId);
+            Console.WriteLine($"OrderPaymentMethodDelete StatusCode = {orderPaymentMethods.StatusCode}, Success = {orderPaymentMethods?.Result}");
+            */
+
+
 
         }
     }

@@ -24,7 +24,7 @@ namespace Balikuj.Client.Example.Services
             /// Label not printed
             /// /////////////////////
 
-            var enumType = LabelType.Zpl;
+            var enumType = LabelType.Pdf;
 
             Console.WriteLine("Getting not printed labels accounts ...");
             var notPrinted = await _client.LabelNotPrinted(enumType);
