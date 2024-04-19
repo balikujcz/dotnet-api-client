@@ -26,6 +26,9 @@ public class Program
                 services.AddSingleton<OrderServiceExample>();
                 services.AddSingleton<PackageServiceExample>();
                 services.AddSingleton<PickingServiceExample>();
+                services.AddSingleton<PickupServiceExample>();
+                services.AddSingleton<PrinterServiceExample>();
+                services.AddSingleton<RuleServiceExample>();
             })
             .Build();
 
@@ -59,7 +62,16 @@ public class Program
         //await host.Services.GetService<PackageServiceExample>()!.RunAsync();
 
         // Picking example
-        await host.Services.GetService<PickingServiceExample>()!.RunAsync();
+        //await host.Services.GetService<PickingServiceExample>()!.RunAsync();
+
+        // Pickup example
+        //await host.Services.GetService<PickupServiceExample>()!.RunAsync();
+
+        // Printer example
+        //await host.Services.GetService<PrinterServiceExample>()!.RunAsync();
+
+        // Rule example
+        await host.Services.GetService<RuleServiceExample>()!.RunAsync();
 
         //await host.RunAsync();
 

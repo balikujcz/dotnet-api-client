@@ -33,6 +33,9 @@ using Balikuj.Client.Models.EmailTemplate;
 using Balikuj.Client.Models.Label;
 using Balikuj.Client.Models.Order;
 using Balikuj.Client.Models.Picking;
+using Balikuj.Client.Models.Pickup;
+using Balikuj.Client.Models.Printer;
+using Balikuj.Client.Models.Rule;
 using Balikuj.Client.Models.Webhooks;
 using Balikuj.Client.Results;
 using System;
@@ -40,6 +43,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Balikuj.Client
@@ -177,6 +181,7 @@ namespace Balikuj.Client
         #endregion
 
 
+        // Done
         #region Address
 
         public async Task<ApiResult<AddressListResponse>> AddressList(AddressListRequest model)
@@ -248,6 +253,7 @@ namespace Balikuj.Client
         #endregion
 
 
+        // Done
         #region Webhook
         
         public async Task<ApiResult<WebhookListResponse>> WebhookList()
@@ -457,7 +463,7 @@ namespace Balikuj.Client
 
         #endregion
 
-
+        // Done
         #region Carrier
 
 
@@ -518,6 +524,7 @@ namespace Balikuj.Client
         #endregion
 
 
+        // Done
         #region EmailAccount
 
         public async Task<ApiResult<EmailAccountListModel>> EmailList()
@@ -631,6 +638,7 @@ namespace Balikuj.Client
         #endregion
 
 
+        // Almost done
         #region EmailTemplate
 
         public async Task<ApiResult<MessageTemplateListResponse>> EmailTemplateList()
@@ -747,28 +755,7 @@ namespace Balikuj.Client
         #endregion
 
 
-        #region Label
-        /*
-        public async Task<ApiResult<Label>> LabelNotPrinted()
-        {
-            if (string.IsNullOrWhiteSpace(_apiKey))
-                throw new BalikujException("Account is not logged in, login is required");
-
-            var httpRequest = CreateRequest("Label/NotPrinted", HttpMethod.Post);
-            httpRequest.Content = new StringContent(JsonSerializer.Serialize(new { }), System.Text.Encoding.UTF8, "application/json");
-
-            var httpResponse = await _httpClient.SendAsync(httpRequest);
-
-            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
-            var response = await JsonSerializer.DeserializeAsync<ApiResult<Label>>(responseStream, _jsonSerializerOptions);
-
-            response.StatusCode = (int)httpResponse.StatusCode;
-            return response;
-        }
-        */
-        #endregion
-
-
+        // Done, Pdf missing
         #region Order
 
         public async Task<ApiResult<OrderListModel>> OrderList()
@@ -1073,6 +1060,7 @@ namespace Balikuj.Client
         #endregion
 
 
+        // Done
         #region Picking
 
         public async Task<ApiResult<bool>> PickingStart(int id)
@@ -1144,6 +1132,321 @@ namespace Balikuj.Client
         }
 
         #endregion
+
+
+        // Done
+        #region Pickup
+
+        public async Task<ApiResult<PickupListResponse>> PickupList()
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("Pickup/Find", HttpMethod.Post);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(new { }), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<PickupListResponse>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+        #endregion
+
+
+        // Hotovo, chybí jen print label a order
+        #region Printer
+
+        public async Task<ApiResult<PrinterListResponse>> PrinterList()
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("Printer/Find", HttpMethod.Post);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(new { }), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<PrinterListResponse>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<Printer>> PrinterDetail(int id)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest($"Printer/{id}", HttpMethod.Get);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(new { }), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<Printer>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<Printer>> PrinterUpdate(int id, PrinterUpdateRequest model)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest($"Printer/{id}", HttpMethod.Put);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<Printer>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<IList<PrinterToken>>> PrinterTokenList()
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest($"Printer/Tokens", HttpMethod.Get);
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<IList<PrinterToken>>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<PrinterToken>> CreatePrinterToken(PrinterTokenCreateRequest model)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest($"Printer/Tokens", HttpMethod.Post);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<PrinterToken>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<PrinterToken>> UpdatePrinterToken(int id, PrinterTokenUpdateRequest model)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest($"Printer/Tokens/{id}", HttpMethod.Put);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<PrinterToken>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<bool>> DeletePrinterToken(int id)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest($"Printer/Tokens/{id}", HttpMethod.Delete);
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<bool>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+        /*
+        public async Task<ApiResult<bool>> PrintLabel(PrinterPrint model)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("Printer/PrintLabel", HttpMethod.Post);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStringAsync();
+            var response = JsonSerializer.Deserialize<ApiResult<bool>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+        */
+
+        #endregion
+
+        // Done
+        #region Rule
+
+        public async Task<ApiResult<RuleListResponse>> RuleList()
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("Rule/Find", HttpMethod.Post);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(new { }), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<RuleListResponse>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<IList<RuleField>>> RuleGetFields()
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("Rule/Fields", HttpMethod.Get);
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<IList<RuleField>>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<Rule>> RuleDetail(int id)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest($"Rule/{id}", HttpMethod.Get);
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<Rule>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<Rule>> RuleCreate(RuleCreateRequest model)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("Rule", HttpMethod.Post);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<Rule>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<Rule>> RuleUpdate(int id, RuleUpdateRequest model)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest($"Rule/{id}", HttpMethod.Put);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<Rule>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<bool>> RuleDelete(int id)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest($"Rule/{id}", HttpMethod.Delete);
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<bool>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<bool>> RuleMoveUp(int id)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest($"Rule/{id}/MoveUp", HttpMethod.Post);
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<bool>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<bool>> RuleMoveDown(int id)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest($"Rule/{id}/MoveDown", HttpMethod.Post);
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<bool>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+        #endregion
+
 
 
         #region Private Methods
