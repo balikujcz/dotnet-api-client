@@ -41,7 +41,7 @@ public class Program
         //await host.Services.GetService<WebhookServiceExample>()!.RunAsync();
 
         // Application example
-        //await host.Services.GetService<ApplicationServiceExample>()!.RunAsync();
+        await host.Services.GetService<ApplicationServiceExample>()!.RunAsync();
 
         // Carrier example
         //await host.Services.GetService<CarrierServiceExample>()!.RunAsync();
@@ -71,7 +71,7 @@ public class Program
         //await host.Services.GetService<PrinterServiceExample>()!.RunAsync();
 
         // Rule example
-        await host.Services.GetService<RuleServiceExample>()!.RunAsync();
+        //await host.Services.GetService<RuleServiceExample>()!.RunAsync();
 
         //await host.RunAsync();
 

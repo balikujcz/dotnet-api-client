@@ -22,6 +22,9 @@
 * THE SOFTWARE.
 */
 
+using Balikuj.Client.Clients.Account;
+using Balikuj.Client.Clients.Carrier;
+using Balikuj.Client.Clients.Carrier.Cp;
 using Balikuj.Client.Configuration;
 using Balikuj.Client.Exceptions;
 using Balikuj.Client.Models.Account;
@@ -43,7 +46,6 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Balikuj.Client
@@ -97,7 +99,42 @@ namespace Balikuj.Client
 
 
         #region Account
+        // Application
+        private AccountClient _accountClient;
+        public AccountClient Account
+        {
+            get
+            {
+                if (_accountClient == null)
+                    _accountClient = new AccountClient(_httpClient, _apiKey);
 
+                return _accountClient;
+            }
+        }
+
+
+        // Carrier
+        private CarrierClient _carrierClient;
+        public CarrierClient Carrier
+        {
+            get
+            {
+                if (_carrierClient == null)
+                    _carrierClient = new CarrierClient(_httpClient, _apiKey);
+
+                return _carrierClient;
+            }
+        }
+
+        // EmailAccount
+
+
+        // EmailTemplate
+
+        
+        // ....
+
+        /*
         /// <summary>
         /// Login to Balikuj API with specified credentials. If you have existing apiKey, you can use it to authenticate.
         /// </summary>
@@ -177,7 +214,7 @@ namespace Balikuj.Client
             return response;
         }
 
-
+        */
         #endregion
 
 
@@ -394,7 +431,7 @@ namespace Balikuj.Client
         }
 
 
-        public async Task<ApiResult<ApplicationModelResponse>> ApplicationGet(int id)
+        public async Task<ApiResult<ApplicationModel>> ApplicationGet(int id)
         {
             if (string.IsNullOrWhiteSpace(_apiKey))
                 throw new BalikujException("Account is not logged in, login is required");
@@ -404,7 +441,7 @@ namespace Balikuj.Client
             var httpResponse = await _httpClient.SendAsync(httpRequest);
 
             var responseStream = await httpResponse.Content.ReadAsStreamAsync();
-            var response = await JsonSerializer.DeserializeAsync<ApiResult<ApplicationModelResponse>>(responseStream, _jsonSerializerOptions);
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<ApplicationModel>>(responseStream, _jsonSerializerOptions);
 
             response.StatusCode = (int)httpResponse.StatusCode;
             return response;
@@ -428,9 +465,152 @@ namespace Balikuj.Client
             return response;
         }
 
+        
+        public async Task<ApiResult<ApplicationModel>> ApplicationUpdate(int id, ApplicationModel model)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest($"Application/{id}", HttpMethod.Put);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStringAsync();
+            var response = JsonSerializer.Deserialize<ApiResult<ApplicationModel>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+        
+
+
+        public async Task<ApiResult<bool>> ApplicationDelete(int id)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest($"Application/{id}", HttpMethod.Delete);
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<bool>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<bool>> ApplicationCreate(ApplicationActivateModel model)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest("Application", HttpMethod.Post);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<bool>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<IEnumerable<ApplicationCarrierModel>>> ApplicationCarrierMappings(int applicationId)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest($"Application/{applicationId}/CarrierMappings", HttpMethod.Get);
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<IEnumerable<ApplicationCarrierModel>>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<ApplicationCarrierModel>> ApplicationCarrierMappingCreate(int applicationId, ApplicationCarrierModel model)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest($"Application/{applicationId}/CarrierMappings", HttpMethod.Post);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<ApplicationCarrierModel>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<ApplicationCarrierModel>> ApplicationCarrierMappingGet(int id, int applicationId)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest($"Application/{applicationId}/CarrierMappings/{id}", HttpMethod.Get);
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<ApplicationCarrierModel>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<ApplicationCarrierModel>> ApplicationCarrierMappingUpdate(int id, int applicationId, ApplicationCarrierModel model)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest($"Application/{applicationId}/CarrierMappings/{id}", HttpMethod.Put);
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<ApplicationCarrierModel>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
+        public async Task<ApiResult<bool>> ApplicationCarrierMappingDelete(int id, int applicationId)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Account is not logged in, login is required");
+
+            var httpRequest = CreateRequest($"Application/{applicationId}/CarrierMappings/{id}", HttpMethod.Delete);
+
+            var httpResponse = await _httpClient.SendAsync(httpRequest);
+
+            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
+            var response = await JsonSerializer.DeserializeAsync<ApiResult<bool>>(responseStream, _jsonSerializerOptions);
+
+            response.StatusCode = (int)httpResponse.StatusCode;
+            return response;
+        }
+
+
 
 
         #endregion
+
 
         // Potřeba vytvořit zásilku a dopravce
         #region Labels
@@ -462,6 +642,7 @@ namespace Balikuj.Client
         }
 
         #endregion
+
 
         // Done
         #region Carrier
@@ -503,7 +684,7 @@ namespace Balikuj.Client
         }
 
 
-        public async Task<ApiResult<IEnumerable<CarrierManipulationUnit>>> CarrierManipulation(CarrierManipulationUnitSearchModel model)
+        public async Task<ApiResult<IEnumerable<CarrierManipulationUnit>>> CarrierManipulationUnits(CarrierManipulationUnitSearchModel model)
         {
             if (string.IsNullOrWhiteSpace(_apiKey))
                 throw new BalikujException("Account is not logged in, login is required");
@@ -1304,6 +1485,7 @@ namespace Balikuj.Client
 
         #endregion
 
+
         // Done
         #region Rule
 
@@ -1446,6 +1628,30 @@ namespace Balikuj.Client
         }
 
         #endregion
+
+
+        #region Carriers
+
+
+        #region CP
+        private CpClient _cpClient = null;
+        public CpClient Cp
+        {
+            get
+            {
+                if (_cpClient == null)
+                    _cpClient = new CpClient(_httpClient, _apiKey);
+
+                return _cpClient;
+            }
+        }
+
+
+        #endregion
+
+
+        #endregion
+
 
 
 

@@ -5,17 +5,17 @@ using System.Text.Json.Serialization;
 
 namespace Balikuj.Client.Models.Application
 {
-    public class ApplicationModelResponse
+    public class ApplicationModel
     {
         public ApplicationTypeModel Type { get; set; }
 
         /// <summary>
-        /// Doména, pod kterou běží aplikace
+        /// Domain, under which the application runs
         /// </summary>
         public string Domain { get; set; }
 
         /// <summary>
-        /// Vlastní popis napojení (poznámka)
+        /// Owner description of the connection (note)
         /// </summary>
         public string Note { get; set; }
 
@@ -23,7 +23,8 @@ namespace Balikuj.Client.Models.Application
 
         public ApplicationStatus Status { get; set; }
 
-        [JsonExtensionData] // Pozor musí být  System.Text.Json, jelikož Newtonsoft nefungoval a dávál položky do pole
+        [JsonExtensionData]
+        // Warning: it must be System.Text.Json, because Newtonsoft didn't work and put items into an array
         public Dictionary<string, object> AdditionalProperties { get; set; } = new Dictionary<string, object>();
     }
 }

@@ -1,4 +1,4 @@
-﻿using Balikuj.Client.Models.Addresses;
+﻿using Balikuj.Client.Models.Carrier.Cp;
 
 namespace Balikuj.Client.Example.Services;
 
@@ -15,6 +15,10 @@ public class AddressServiceExample
 
     public async Task RunAsync()
     {
+        var query = await _client.Carrier.Cp.GetAsync<AddPackageCpModel>(10);
+
+        var createResult = await _client.Carrier.Cp.CreateAsync([new AddPackageCpModel { RecName = "František Hromek", RecStreet = "Vavrečkova 7074", ServiceType = "DR" }]);
+
         /////////////////////
         // Create new address
         /////////////////////
