@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Balikuj.Client.Models.EmailAccount
 {
-    public class EmailAccountListModel : PagedResponse<EmailAccount>
+    public class EmailAccountListModel : PagedResponse<EmailAccountModel>
     {
     }
 }

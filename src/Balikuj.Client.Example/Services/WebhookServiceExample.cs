@@ -20,7 +20,7 @@ public class WebhookServiceExample
         //////////////////////
         /*
         Console.WriteLine("Creating new address ...");
-        var webhook = await _client.WebhookList();
+        var webhook = await _client.Webhook.List();
         Console.WriteLine($"Adress StatusCode = {webhook.StatusCode}, count = {webhook?.Result?.Total}");
         */
 
@@ -30,7 +30,7 @@ public class WebhookServiceExample
         /////////////////////////////
         /*
         Console.WriteLine("Getting list of webhook events ...");
-        var webhookListResult = await _client.WebhookEvents();
+        var webhookListResult = await _client.Webhook.Events();
         Console.WriteLine($"WebhookList StatusCode = {webhookListResult.StatusCode}, items = {webhookListResult?.Result?.Count}");
         */
 
@@ -41,7 +41,7 @@ public class WebhookServiceExample
         int desiredWebhookId = 4;
 
         Console.WriteLine("Getting webhook  ...");
-        var webhook = await _client.WebhookGet(desiredWebhookId);
+        var webhook = await _client.Webhook.Get(desiredWebhookId);
         Console.WriteLine($"WebhookGet StatusCode = {webhook.StatusCode}, Id = {webhook?.Result?.Id}");
         */
 
@@ -61,7 +61,7 @@ public class WebhookServiceExample
             }
         };
         Console.WriteLine("Creating webhook events ...");
-        var webhookCreateResult = await _client.WebhookCreate(webhookCreateModel);
+        var webhookCreateResult = await _client.Webhook.Create(webhookCreateModel);
         Console.WriteLine($"WebhookCreate StatusCode = {webhookCreateResult.StatusCode}, items = {webhookCreateResult?.Result?.Webhooks.Count}");
         */
 
@@ -76,7 +76,7 @@ public class WebhookServiceExample
             Url = "https://www.yourdomain.com/path/continue/updated"
         };
         Console.WriteLine("Getting list of webhook events ...");
-        var webhookUpdateResult = await _client.WebhookUpdate(webhookUpdateModel);
+        var webhookUpdateResult = await _client.Webhook.Update(webhookUpdateModel);
         Console.WriteLine($"WebhookUpdate StatusCode = {webhookUpdateResult.StatusCode}, result = {webhookUpdateResult?.Result}");
         */
 
@@ -86,7 +86,7 @@ public class WebhookServiceExample
         ///////////////////////////////
         /*
         Console.WriteLine("Deleting webhook ...");
-        var webhookDeleteResult = await _client.WebhookDelete(4);
+        var webhookDeleteResult = await _client.Webhook.Delete(4);
         Console.WriteLine($"WebhookUpdate StatusCode = {webhookDeleteResult.StatusCode}, result = {webhookDeleteResult?.Result}");
         */
 

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Balikuj.Client.Models.Printer
 {
-    public class Printer
+    public class PrinterModel
     {
         /// <summary>
         /// Hostname of the computer

@@ -28,10 +28,10 @@ namespace Balikuj.Client.Example.Services
             int orderId = 2;
 
             Console.WriteLine("Starting picking order  ...");
-            var orders = await _client.PickingStart(orderId);
+            var orders = await _client.Picking.Start(orderId);
             Console.WriteLine($"PickingStart StatusCode = {orders.StatusCode}, Success = {orders?.Result}");
+            
             */
-
 
             ////////////////////
             /// Picking cancel
@@ -41,7 +41,7 @@ namespace Balikuj.Client.Example.Services
             int orderId = 2;
 
             Console.WriteLine("Cancelling picking order  ...");
-            var orders = await _client.PickingCancel(orderId);
+            var orders = await _client.Picking.Cancel(orderId);
             Console.WriteLine($"PickingCancel StatusCode = {orders.StatusCode}, Success = {orders?.Result}");
             */
 
@@ -66,7 +66,7 @@ namespace Balikuj.Client.Example.Services
             };
 
             Console.WriteLine("Saving picking order  ...");
-            var orders = await _client.PickingSave(orderId, saveModel);
+            var orders = await _client.Picking.Save(orderId, saveModel);
             Console.WriteLine($"PickingSave StatusCode = {orders.StatusCode}, Success = {orders?.Result}");
             */
 
@@ -79,7 +79,7 @@ namespace Balikuj.Client.Example.Services
             int orderId = 2;
 
             Console.WriteLine("Finishing picking order  ...");
-            var orders = await _client.PickingFinish(orderId);
+            var orders = await _client.Picking.Finish(orderId);
             Console.WriteLine($"PickingFinish StatusCode = {orders.StatusCode}, Success = {orders?.Result}");
             */
         }

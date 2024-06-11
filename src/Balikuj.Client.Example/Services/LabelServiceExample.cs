@@ -27,7 +27,7 @@ namespace Balikuj.Client.Example.Services
             var enumType = LabelType.Pdf;
 
             Console.WriteLine("Getting not printed labels accounts ...");
-            var notPrinted = await _client.LabelNotPrinted(enumType);
+            var notPrinted = await _client.Label.NotPrinted(enumType);
             Console.WriteLine($"LabelNotPrinted StatusCode = {notPrinted.StatusCode}, Count = {notPrinted?.Result?.Count}");
         }
     }

@@ -2,7 +2,7 @@
 
 namespace Balikuj.Client.Models.Addresses
 {
-    public class AddressListResponse : PagedResponse<Address>
+    public class AddressListResponse : PagedResponse<AddressModel>
     {
     }
 }

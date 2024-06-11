@@ -72,7 +72,7 @@ namespace Balikuj.Client.Models.Package
         /// <example>false</example>
         public bool Editable { get; set; }
 
-        public Address MaskAddress { get; set; }
+        public AddressModel MaskAddress { get; set; }
         public int? MaskAddressId { get; set; }
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace Balikuj.Client.Models.Package
         /// <summary>
         /// Recipient address
         /// </summary>
-        public Address RecAddress { get; set; }
+        public AddressModel RecAddress { get; set; }
         public int RecAddressId { get; set; }
 
         /// <summary>
@@ -159,7 +159,7 @@ namespace Balikuj.Client.Models.Package
         /// <example>Eshop order 0124515</example>
         public string Reference { get; set; }
 
-        public Address SenderAddress { get; set; }
+        public AddressModel SenderAddress { get; set; }
         public int? SenderAddressId { get; set; }
 
         /// <summary>

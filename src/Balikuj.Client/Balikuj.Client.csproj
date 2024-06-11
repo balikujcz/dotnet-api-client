@@ -14,11 +14,4 @@
     <PackageReference Include="System.Text.Json" Version="8.0.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Clients\Application\" />
-    <Folder Include="Clients\EmailAccount\" />
-    <Folder Include="Clients\EmailTemplate\" />
-    <Folder Include="Models\Carrier\Dpd\" />
-  </ItemGroup>
-
 </Project>

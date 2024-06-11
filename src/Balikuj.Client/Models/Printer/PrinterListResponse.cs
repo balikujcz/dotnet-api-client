@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Balikuj.Client.Models.Printer
 {
-    public class PrinterListResponse : PagedResponse<Printer>
+    public class PrinterListResponse : PagedResponse<PrinterModel>
     {
     }
 }

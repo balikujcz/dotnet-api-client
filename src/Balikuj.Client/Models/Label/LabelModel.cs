@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Balikuj.Client.Models.Label
 {
-    public class Label
+    public class LabelModel
     {
         /// <summary>
         /// Code of the carrier

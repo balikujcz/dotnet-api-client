@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Balikuj.Client.Models.Order
 {
-    public class OrderListModel : PagedResponse<Order>
+    public class OrderListModel : PagedResponse<OrderModel>
     {
     }
 }

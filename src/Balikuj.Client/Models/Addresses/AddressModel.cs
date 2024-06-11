@@ -1,6 +1,6 @@
 ﻿namespace Balikuj.Client.Models.Addresses
 {
-    public class Address
+    public class AddressModel
     {
         public int Id { get; set; }
 

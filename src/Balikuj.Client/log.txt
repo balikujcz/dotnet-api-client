@@ -1,0 +1,40 @@
+{
+  "CallDetails": {
+    "Carrier": "Dpd",
+    "Method": "Write"
+  },
+  "RequestDetails": {
+    "RequestUri": "https://localhost:7104/api/Dpd/Cancel",
+    "RequestMethod": "POST",
+    "RequestHeaders": "X-BalikujAuthToken: 5A3817B22676878834EA43A0CC55179AF914396874C1D2577EDCE028F5D12F600F91E8E227A54A8B76EE9F10F737BFABA0B742A3C97D990E866A3B7F1F401BBE\r\n"
+  },
+  "RequestContent": {
+    "RequestContent": {
+      "Packages": [
+        "23755010135025",
+        "23755010135026"
+      ]
+    }
+  },
+  "Response": {
+    "ResponseStatusCode": 200,
+    "ResponseHeaders": "Date: Tue, 11 Jun 2024 13:11:14 GMT\r\nServer: Kestrel\r\nTransfer-Encoding: chunked\r\nX-MiniProfiler-Ids: [\u0022c2c8d485-2b7d-4bf0-855f-92a333b3be4c\u0022,\u00221ccc5439-64f5-46e0-b8ff-06399e837f5a\u0022,\u002299261a75-086b-4c01-8aab-2df3e139a65c\u0022,\u002295360282-dd9e-4f13-8240-51ee9e8a5317\u0022,\u0022d1c3c1b8-4328-49bb-af40-9f7a289b4575\u0022,\u0022a7d1b5d7-8684-46a7-91c2-c5aead5bf272\u0022,\u00225af07ac2-6477-4f02-9c48-3b9f6ce8c788\u0022,\u00220abff897-bebd-45ad-b2e3-afda0c751cb5\u0022,\u0022bba8aae7-aceb-4884-96e0-3e410530441c\u0022,\u00227aa0db95-b5d0-46fd-b99b-1229d9999912\u0022,\u00227b400dd3-5007-48c2-a3b0-8ece33853085\u0022,\u0022eb308664-8f30-4be4-a993-17f039411c4d\u0022,\u0022d2b6e95d-43cd-4df2-8797-1d258291e156\u0022,\u0022213163d3-cd70-4684-81dd-814c672075a5\u0022,\u00220643189f-11b7-45e1-afbc-d579c3087b3c\u0022,\u0022089fbaf2-f9b7-48cb-8ee5-1e10791dbfef\u0022]\r\nX-Correlation-Id: 6ae033a7-dda2-407e-89fe-5133d3984e94\r\n",
+    "ResponseContent": {
+      "Result": [
+        {
+          "PackageNumberCarrier": "23755010135025",
+          "Successfull": false,
+          "Message": "package.cancel.alreadysent"
+        },
+        {
+          "PackageNumberCarrier": "23755010135026",
+          "Successfull": false,
+          "Message": "package.cancel.alreadysent"
+        }
+      ],
+      "CorrelationId": "6ae033a7-dda2-407e-89fe-5133d3984e94",
+      "StatusCode": 200,
+      "Errors": []
+    }
+  }
+}

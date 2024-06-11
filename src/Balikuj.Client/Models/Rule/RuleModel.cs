@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Balikuj.Client.Models.Rule
 {
-    public class Rule
+    public class RuleModel
     {
         public RuleType Type { get; set; }
 

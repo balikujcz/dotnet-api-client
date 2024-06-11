@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Balikuj.Client.Models.Package;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,11 +24,39 @@ namespace Balikuj.Client.Example.Services
             ////////////////////////
             /// Package list
             /////////////////////////
-            
+
             /*
             Console.WriteLine("Getting packages ...");
-            var orders = await _client.PackageList();
-            Console.WriteLine($"PackageList StatusCode = {orders.StatusCode}, items = {orders?.Result?.Total}");
+            var package = await _client.Package.PackageList();
+            Console.WriteLine($"PackageList StatusCode = {package.StatusCode}, items = {package?.Result?.Total}");
+            */
+
+
+            ////////////////////////
+            /// Package not ordered info
+            /////////////////////////
+
+            /*
+            Console.WriteLine("Getting packages ...");
+            var package = await _client.Package.NotOrderedInfo();
+            Console.WriteLine($"PackageNotOrderedInfo StatusCode = {package.StatusCode}, items = {package?.Result.Count()}");
+            */
+
+
+            ////////////////////////
+            /// Package activity
+            /////////////////////////
+            ///
+
+            /*
+            var model = new PackageActivitySearchModel
+            {
+                Search = "23755010135019"
+            };
+
+            Console.WriteLine("Getting packages ...");
+            var package = await _client.Package.Activity(model);
+            Console.WriteLine($"PackageActivity StatusCode = {package.StatusCode}, items = {package?.Result?.Total}");
             */
         }
     }

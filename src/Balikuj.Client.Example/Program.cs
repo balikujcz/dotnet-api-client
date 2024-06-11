@@ -1,5 +1,6 @@
 ﻿using Balikuj.Client.Configuration;
 using Balikuj.Client.Example.Services;
+using Balikuj.Client.Example.Services.CarrierServices;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -29,6 +30,8 @@ public class Program
                 services.AddSingleton<PickupServiceExample>();
                 services.AddSingleton<PrinterServiceExample>();
                 services.AddSingleton<RuleServiceExample>();
+                services.AddSingleton<CpServiceExample>();
+                services.AddSingleton<DpdServiceExample>();
             })
             .Build();
 
@@ -41,7 +44,7 @@ public class Program
         //await host.Services.GetService<WebhookServiceExample>()!.RunAsync();
 
         // Application example
-        await host.Services.GetService<ApplicationServiceExample>()!.RunAsync();
+        //await host.Services.GetService<ApplicationServiceExample>()!.RunAsync();
 
         // Carrier example
         //await host.Services.GetService<CarrierServiceExample>()!.RunAsync();
@@ -72,6 +75,15 @@ public class Program
 
         // Rule example
         //await host.Services.GetService<RuleServiceExample>()!.RunAsync();
+
+
+        // Carries
+
+        // Ceska Posta
+        // await host.Services.GetService<CpServiceExample>()!.RunAsync();
+
+        // DPD
+        await host.Services.GetService<DpdServiceExample>()!.RunAsync();
 
         //await host.RunAsync();
 

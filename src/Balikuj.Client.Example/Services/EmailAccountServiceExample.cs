@@ -18,15 +18,18 @@ namespace Balikuj.Client.Example.Services
             _client.SetApiKey(ApiRuntimeSettings.ApiKey);
         }
 
+
+
         public async Task RunAsync()
         {
             /////////////////////
             /// Email list
             /////////////////////
+            ///
             
             /*
             Console.WriteLine("Getting email accounts ...");
-            var emailList = await _client.EmailList();
+            var emailList = await _client.EmailAccount.List();
             Console.WriteLine($"EmailList StatusCode = {emailList.StatusCode}, count = {emailList?.Result?.Total}");
             */
 
@@ -36,7 +39,7 @@ namespace Balikuj.Client.Example.Services
             //////////////////////
             
             /*
-            var newEmail = new EmailAccount
+            var newEmail = new EmailAccountModel
             {
                 Id = 0,
                 Email = "josefnovak2@email.cz",
@@ -50,7 +53,7 @@ namespace Balikuj.Client.Example.Services
             };
 
             Console.WriteLine("Creating email account ...");
-            var emailCreate = await _client.EmailCreate(newEmail);
+            var emailCreate = await _client.EmailAccount.Create(newEmail);
             Console.WriteLine($"EmailCreate StatusCode = {emailCreate.StatusCode}, result = {emailCreate?.Result}");
             */
 
@@ -63,7 +66,7 @@ namespace Balikuj.Client.Example.Services
             int emailId = 2;
 
             Console.WriteLine("Creating email account ...");
-            var emailMarkedAsDefault = await _client.EmailMarkAsDefault(emailId);
+            var emailMarkedAsDefault = await _client.EmailAccount.MarkAsDefault(emailId);
             Console.WriteLine($"EmailCreate StatusCode = {emailMarkedAsDefault.StatusCode}, result = {emailMarkedAsDefault?.Result}");
             */
 
@@ -72,7 +75,7 @@ namespace Balikuj.Client.Example.Services
             /////////////////////
             
             /*
-            var updateEmailModel = new EmailAccount
+            var updateEmailModel = new EmailAccountModel
             {
                 Id = 2,
                 Email = "josefnovak@email.cz",
@@ -86,10 +89,10 @@ namespace Balikuj.Client.Example.Services
             };
 
             Console.WriteLine("Updating email account ...");
-            var updatedEmal = await _client.EmailUpdate(updateEmailModel);
+            var updatedEmal = await _client.EmailAccount.Update(updateEmailModel);
             Console.WriteLine($"EmailCreate StatusCode = {updatedEmal.StatusCode}, result = {updatedEmal?.Result}");
+            
             */
-
 
             /////////////////////
             /// Email delete
@@ -100,7 +103,7 @@ namespace Balikuj.Client.Example.Services
             int emailId = 5;
 
             Console.WriteLine("Creating email account ...");
-            var emailDelete = await _client.EmailDelete(emailId);
+            var emailDelete = await _client.EmailAccount.Delete(emailId);
             Console.WriteLine($"EmailCreate StatusCode = {emailDelete.StatusCode}, result = {emailDelete?.Result}");
             */
 
@@ -117,7 +120,7 @@ namespace Balikuj.Client.Example.Services
             };
 
             Console.WriteLine("Sending testing email account ...");
-            var emailTestSend = await _client.EmailSendTest(emailTestModel);
+            var emailTestSend = await _client.EmailAccount.SendTest(emailTestModel);
             Console.WriteLine($"EmailSendTest StatusCode = {emailTestSend.StatusCode}, result = {emailTestSend?.Result}");
             */
         }

@@ -27,7 +27,7 @@ namespace Balikuj.Client.Example.Services
 
             /*
             Console.WriteLine("Getting printers ...");
-            var printers = await _client.PrinterList();
+            var printers = await _client.Printer.List();
             Console.WriteLine($"PrinterList StatusCode = {printers.StatusCode}, count = {printers?.Result?.Total}");
             */
 
@@ -40,7 +40,7 @@ namespace Balikuj.Client.Example.Services
             int desiredId = 1;
 
             Console.WriteLine("Getting printer detail ...");
-            var printer = await _client.PrinterDetail(desiredId);
+            var printer = await _client.Printer.Detail(desiredId);
             Console.WriteLine($"PrinterDetail StatusCode = {printer.StatusCode}, Name = {printer?.Result?.Name}");
             */
 
@@ -58,19 +58,19 @@ namespace Balikuj.Client.Example.Services
             };
 
             Console.WriteLine("Getting printer detail ...");
-            var printer = await _client.PrinterUpdate(desiredId, updateModel);
+            var printer = await _client.Printer.Update(desiredId, updateModel);
             Console.WriteLine($"PrinterDetail StatusCode = {printer.StatusCode}, Name = {printer?.Result?.Name}");
             */
 
-
+            /*
             ////////////////////////
             /// Printer token list
             ////////////////////////
             
             Console.WriteLine("Getting printer tokens ...");
-            var tokenList = await _client.PrinterTokenList();
+            var tokenList = await _client.Printer.TokenList();
             Console.WriteLine($"PrinterTokenList StatusCode = {tokenList.StatusCode}, Count = {tokenList?.Result?.Count}");
-
+            */
 
 
             ////////////////////////
@@ -84,7 +84,7 @@ namespace Balikuj.Client.Example.Services
             };
             
             Console.WriteLine("Creating printer token ...");
-            var createdToken = await _client.CreatePrinterToken(token);
+            var createdToken = await _client.Printer.CreatePrinterToken(token);
             Console.WriteLine($"CreatePrinterToken StatusCode = {createdToken.StatusCode}, CreatedOn = {createdToken?.Result?.Created.ToString()}");
             */
 
@@ -102,7 +102,7 @@ namespace Balikuj.Client.Example.Services
             };
             
             Console.WriteLine("Udpating printer token ...");
-            var updatedToken = await _client.UpdatePrinterToken(desiredId, token);
+            var updatedToken = await _client.Printer.UpdatePrinterToken(desiredId, token);
             Console.WriteLine($"UpdatePrinterToken StatusCode = {updatedToken.StatusCode}, UpdatedOn = {updatedToken?.Result?.Updated.ToString()}");
             */
 
@@ -115,7 +115,7 @@ namespace Balikuj.Client.Example.Services
             int desiredId = 3;
             
             Console.WriteLine("Deleting printer token ...");
-            var deletedToken = await _client.DeletePrinterToken(desiredId);
+            var deletedToken = await _client.Printer.DeletePrinterToken(desiredId);
             Console.WriteLine($"DeletePrinterToken StatusCode = {deletedToken.StatusCode}, Success = {deletedToken?.Result}");
             */
 
@@ -134,7 +134,7 @@ namespace Balikuj.Client.Example.Services
             };
             
             Console.WriteLine("Printing label ...");
-            var printedLabel = await _client.PrintLabel(printLabel);
+            var printedLabel = await _client.Printer.PrintLabel(printLabel);
             Console.WriteLine($"PrintLabel StatusCode = {printedLabel.StatusCode}, Success = {printedLabel?.Result}");
             */
 

@@ -21,7 +21,7 @@ namespace Balikuj.Client.Example.Services
 
             /*
             Console.WriteLine("Getting rules ...");
-            var rules = await _client.RuleList();
+            var rules = await _client.Rule.List();
             Console.WriteLine($"RuleList StatusCode = {rules.StatusCode}, Count = {rules?.Result?.Total}");
             */
 
@@ -31,7 +31,7 @@ namespace Balikuj.Client.Example.Services
 
             /*
             Console.WriteLine("Getting rule fields ...");
-            var fields = await _client.RuleGetFields();
+            var fields = await _client.Rule.GetFields();
             Console.WriteLine($"RuleGetFields StatusCode = {fields.StatusCode}, Count = {fields?.Result?.Count}");
             */
 
@@ -43,7 +43,7 @@ namespace Balikuj.Client.Example.Services
             int desiredId = 1;
 
             Console.WriteLine("Getting rule detail ...");
-            var ruleDetail = await _client.RuleDetail(desiredId);
+            var ruleDetail = await _client.Rule.Detail(desiredId);
             Console.WriteLine($"RuleGetFields StatusCode = {ruleDetail.StatusCode}, RuleName = {ruleDetail?.Result?.Name}");
             */
 
@@ -103,7 +103,7 @@ namespace Balikuj.Client.Example.Services
             };
 
             Console.WriteLine("Creating rule ...");
-            var createdRule = await _client.RuleCreate(newRule);
+            var createdRule = await _client.Rule.Create(newRule);
             Console.WriteLine($"RuleCreate StatusCode = {createdRule.StatusCode}, RuleName = {createdRule?.Result?.Name}");
             */
 
@@ -163,7 +163,7 @@ namespace Balikuj.Client.Example.Services
 
 
             Console.WriteLine("Creating rule ...");
-            var createdRule = await _client.RuleCreate(newRule);
+            var createdRule = await _client.Rule.Create(newRule);
             Console.WriteLine($"RuleCreate StatusCode = {createdRule.StatusCode}, RuleName = {createdRule?.Result?.Name}");
             */
 
@@ -224,20 +224,20 @@ namespace Balikuj.Client.Example.Services
             };
 
             Console.WriteLine("Updating rule ...");
-            var updatedRule = await _client.RuleUpdate(desiredId, updateRule);
+            var updatedRule = await _client.Rule.Update(desiredId, updateRule);
             Console.WriteLine($"RuleUpdate StatusCode = {updatedRule.StatusCode}, RuleName = {updatedRule?.Result?.Name}");
             */
 
-
+            /*
             /////////////////
             /// Rule delete
             /////////////////
 
-            /*
+            
             int desiredId = 4;
 
             Console.WriteLine("Deleting rule ...");
-            var deletedRule = await _client.RuleDelete(desiredId);
+            var deletedRule = await _client.Rule.Delete(desiredId);
             Console.WriteLine($"RuleDelete StatusCode = {deletedRule.StatusCode}, Success = {deletedRule?.Result}");
             */
 
@@ -250,7 +250,7 @@ namespace Balikuj.Client.Example.Services
             int desiredId = 3;
 
             Console.WriteLine("Moving rule up ...");
-            var movedRule = await _client.RuleMoveUp(desiredId);
+            var movedRule = await _client.Rule.MoveUp(desiredId);
             Console.WriteLine($"RuleMoveUp StatusCode = {movedRule.StatusCode}, Success = {movedRule?.Result}");
             */
 
@@ -263,7 +263,7 @@ namespace Balikuj.Client.Example.Services
             int desiredId = 3;
 
             Console.WriteLine("Moving rule down ...");
-            var movedRule = await _client.RuleMoveDown(desiredId);
+            var movedRule = await _client.Rule.MoveDown(desiredId);
             Console.WriteLine($"RuleMoveDown StatusCode = {movedRule.StatusCode}, Success = {movedRule?.Result}");
             */
 

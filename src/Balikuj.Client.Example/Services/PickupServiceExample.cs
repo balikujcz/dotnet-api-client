@@ -23,11 +23,11 @@ namespace Balikuj.Client.Example.Services
             /// Pickup List
             ////////////////////
 
-
+            /*
             Console.WriteLine("Getting pickup list  ...");
-            var pickup = await _client.PickupList();
+            var pickup = await _client.Pickup.List();
             Console.WriteLine($"PickupList StatusCode = {pickup.StatusCode}, Items = {pickup?.Result?.Total}");
-            
+            */
         }
     }
 }

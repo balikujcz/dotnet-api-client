@@ -23,11 +23,11 @@ namespace Balikuj.Client.Example.Services
             ///////////////////////
             /// Email template find
             ///////////////////////
-
+            
             /*
             Console.WriteLine("Finding email templates ...");
-            var emailTemplates = await _client.EmailTemplateList();
-            Console.WriteLine($"EmailCreate StatusCode = {emailTemplates.StatusCode}, result = {emailTemplates?.Result?.Total}");
+            var emailTemplates = await _client.EmailTemplate.List();
+            Console.WriteLine($"EmailTemplateList StatusCode = {emailTemplates.StatusCode}, result = {emailTemplates?.Result?.Total}");
             */
 
 
@@ -55,8 +55,8 @@ namespace Balikuj.Client.Example.Services
             };
 
             Console.WriteLine("Updating email template ...");
-            var updatedTemplate = await _client.EmailTemplateUpdate(updateModel);
-            Console.WriteLine($"EmailCreate StatusCode = {updatedTemplate.StatusCode}, result = {updatedTemplate?.Result}");
+            var updatedTemplate = await _client.EmailTemplate.Update(updateModel);
+            Console.WriteLine($"EmailTemplateUpdate StatusCode = {updatedTemplate.StatusCode}, result = {updatedTemplate?.Result}");
             */
 
             /////////////////////////
@@ -82,8 +82,8 @@ namespace Balikuj.Client.Example.Services
             };
 
             Console.WriteLine("Updating email template ...");
-            var createdTemplate = await _client.EmailTemplateCreate(createModel);
-            Console.WriteLine($"EmailCreate StatusCode = {createdTemplate.StatusCode}, result = {createdTemplate?.Result}");
+            var createdTemplate = await _client.EmailTemplate.Create(createModel);
+            Console.WriteLine($"EmailTemplateCreate StatusCode = {createdTemplate.StatusCode}, result = {createdTemplate?.Result}");
             */
 
 
@@ -95,8 +95,8 @@ namespace Balikuj.Client.Example.Services
             int templateId = 6;
 
             Console.WriteLine("Deleting email template ...");
-            var deletedTemplate = await _client.EmailTemplateDelete(templateId);
-            Console.WriteLine($"EmailCreate StatusCode = {deletedTemplate.StatusCode}, result = {deletedTemplate?.Result}");
+            var deletedTemplate = await _client.EmailTemplate.Delete(templateId);
+            Console.WriteLine($"EmailTemplateDelete StatusCode = {deletedTemplate.StatusCode}, result = {deletedTemplate?.Result}");
             */
 
 
@@ -125,7 +125,7 @@ namespace Balikuj.Client.Example.Services
 
 
             Console.WriteLine("Copying email template ...");
-            var copiedTemplate = await _client.EmailTemplateCopy(copyModel);
+            var copiedTemplate = await _client.EmailTemplate.EmailTemplateCopy(copyModel);
             Console.WriteLine($"EmailCreate StatusCode = {copiedTemplate.StatusCode}, Id = {copiedTemplate?.Result}");
             */
 

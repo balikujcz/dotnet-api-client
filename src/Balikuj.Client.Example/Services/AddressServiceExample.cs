@@ -1,4 +1,5 @@
-﻿using Balikuj.Client.Models.Carrier.Cp;
+﻿using Balikuj.Client.Models.Addresses;
+using Balikuj.Client.Models.Carrier.Cp;
 
 namespace Balikuj.Client.Example.Services;
 
@@ -14,10 +15,7 @@ public class AddressServiceExample
     }
 
     public async Task RunAsync()
-    {
-        var query = await _client.Carrier.Cp.GetAsync<AddPackageCpModel>(10);
-
-        var createResult = await _client.Carrier.Cp.CreateAsync([new AddPackageCpModel { RecName = "František Hromek", RecStreet = "Vavrečkova 7074", ServiceType = "DR" }]);
+    {   
 
         /////////////////////
         // Create new address
@@ -35,8 +33,8 @@ public class AddressServiceExample
             Type = (int)AddressType.Recepient,
         };
         Console.WriteLine("Creating new address ...");
-        var addressListResult = await _client.AddressCreate(addressCreateRquest);
-        Console.WriteLine($"Adress StatusCode = {addressListResult.StatusCode}, id = {addressListResult?.Result?.Id}");
+        var addressListResult = await _client.Address.Create(addressCreateRquest);
+        Console.WriteLine($"AdressCreate StatusCode = {addressListResult.StatusCode}, id = {addressListResult?.Result?.Id}");
         */
 
 
@@ -45,7 +43,7 @@ public class AddressServiceExample
         ////////////////////////
         /*
         Console.WriteLine("Getting list of addresses ...");
-        var addressListResult = await _client.AddressList(new AddressListRequest());
+        var addressListResult = await _client.Address.List(new AddressListRequest());
         Console.WriteLine($"AddressList StatusCode = {addressListResult.StatusCode}, items = {addressListResult?.Result?.Data?.Count}");
         */
 

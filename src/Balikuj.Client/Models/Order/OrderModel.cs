@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace Balikuj.Client.Models.Order
 {
-    public class Order
+    public class OrderModel
     {
         /// <summary>
         /// Watch out, must be System.Text.Json, because Newtonsoft didn't work and put items into an array
@@ -27,7 +27,7 @@ namespace Balikuj.Client.Models.Order
         /// <summary>
         /// Facturation address
         /// </summary>
-        public Address BillingAddress { get; set; }
+        public AddressModel BillingAddress { get; set; }
 
         /// <summary>
         /// Date of order deletion
@@ -61,7 +61,7 @@ namespace Balikuj.Client.Models.Order
         /// <summary>
         /// Address for delivery, if different from billing, can be null
         /// </summary>
-        public Address DeliveryAddress { get; set; }
+        public AddressModel DeliveryAddress { get; set; }
 
         /// <summary>
         /// Exchange rate

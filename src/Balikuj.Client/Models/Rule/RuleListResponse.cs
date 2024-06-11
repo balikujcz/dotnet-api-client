@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Balikuj.Client.Models.Rule
 {
-    public class RuleListResponse : PagedResponse<Rule>
+    public class RuleListResponse : PagedResponse<RuleModel>
     {
     }
 }

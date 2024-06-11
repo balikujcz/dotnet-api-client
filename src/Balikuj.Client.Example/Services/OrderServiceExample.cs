@@ -27,7 +27,7 @@ namespace Balikuj.Client.Example.Services
 
             /*
             Console.WriteLine("Getting orders ...");
-            var orders = await _client.OrderList();
+            var orders = await _client.Order.List();
             Console.WriteLine($"OrderList StatusCode = {orders.StatusCode}, items = {orders?.Result?.Total}");
             */
 
@@ -40,7 +40,7 @@ namespace Balikuj.Client.Example.Services
             int desiredId = 1;
             
             Console.WriteLine("Getting order ...");
-            var order = await _client.OrderGet(desiredId);
+            var order = await _client.Order.Get(desiredId);
             Console.WriteLine($"OrderList StatusCode = {order.StatusCode}, OrderNumber = {order?.Result?.OrderNumber}");
             */
 
@@ -75,7 +75,7 @@ namespace Balikuj.Client.Example.Services
             };
 
             Console.WriteLine("Getting order ...");
-            var order = await _client.OrderUpdate(updateModel);
+            var order = await _client.Order.Update(updateModel);
             Console.WriteLine($"OrderList StatusCode = {order.StatusCode}, Count = {order?.Result?.Count}");
             */
 
@@ -93,9 +93,10 @@ namespace Balikuj.Client.Example.Services
             
 
             Console.WriteLine("Creating order packages ...");
-            var order = await _client.OrderCreatePackages(packages);
+            var order = await _client.Order.CreatePackages(packages);
             Console.WriteLine($"OrderCreatePackages StatusCode = {order.StatusCode}, OrdersCount = {order?.Result?.Orders.Count}");
             */
+
 
             ////////////////////////
             /// Order item update
@@ -114,7 +115,7 @@ namespace Balikuj.Client.Example.Services
 
 
             Console.WriteLine("Updating order items ...");
-            var order = await _client.OrderItemUpdate(desiredId, items);
+            var order = await _client.Order.ItemUpdate(desiredId, items);
             Console.WriteLine($"OrderItemUpdate StatusCode = {order.StatusCode}, Count = {order?.Result?.Count()}");
             */
 
@@ -126,7 +127,7 @@ namespace Balikuj.Client.Example.Services
 
             /*
             Console.WriteLine("Getting all order statuses ...");
-            var order = await _client.OrderStatus();
+            var order = await _client.Order.Status();
             Console.WriteLine($"OrderStatus StatusCode = {order.StatusCode}, Count = {order?.Result?.Count()}");
             */
 
@@ -140,7 +141,7 @@ namespace Balikuj.Client.Example.Services
             int desiredId = 1;
             
             Console.WriteLine("Getting order status by id ...");
-            var order = await _client.OrderStatusGet(desiredId);
+            var order = await _client.Order.StatusGet(desiredId);
             Console.WriteLine($"OrderStatusGet StatusCode = {order.StatusCode}, Id = {order?.Result?.Id}");
             */
 
@@ -164,7 +165,7 @@ namespace Balikuj.Client.Example.Services
             };
             
             Console.WriteLine("Updating order status ...");
-            var order = await _client.OrderStatusUpdate(desiredId, updateModel);
+            var order = await _client.Order.StatusUpdate(desiredId, updateModel);
             Console.WriteLine($"OrderStatusUpdate StatusCode = {order.StatusCode}, Id = {order?.Result?.Id}");
             */
 
@@ -185,7 +186,7 @@ namespace Balikuj.Client.Example.Services
             };
             
             Console.WriteLine("Creating order status ...");
-            var order = await _client.OrderStatusCreate(createModel);
+            var order = await _client.Order.StatusCreate(createModel);
             Console.WriteLine($"OrderStatusCreate StatusCode = {order.StatusCode}, Id = {order?.Result?.Id}");
             */
 
@@ -199,7 +200,7 @@ namespace Balikuj.Client.Example.Services
             int desiredId = 1;
             
             Console.WriteLine("Deleting order status ...");
-            var order = await _client.OrderStatusDelete(desiredId);
+            var order = await _client.Order.StatusDelete(desiredId);
             Console.WriteLine($"OrderStatusDelete StatusCode = {order.StatusCode}, Success = {order?.Result}");
             */
 
@@ -211,7 +212,7 @@ namespace Balikuj.Client.Example.Services
 
             /*
             Console.WriteLine("Getting payment methods ...");
-            var order = await _client.OrderPaymentMethodList();
+            var order = await _client.Order.PaymentMethodList();
             Console.WriteLine($"OrderPaymentMethod StatusCode = {order.StatusCode}, Count = {order?.Result?.Count()}");
             */
             
@@ -225,7 +226,7 @@ namespace Balikuj.Client.Example.Services
             int desiredId = 1;
             
             Console.WriteLine("Getting the payment method ...");
-            var orderPaymentMethods = await _client.OrderPaymentMethodGet(desiredId);
+            var orderPaymentMethods = await _client.Order.PaymentMethodGet(desiredId);
             Console.WriteLine($"OrderPaymentMethod StatusCode = {orderPaymentMethods.StatusCode}, Id = {orderPaymentMethods?.Result?.Id}");
             */
 
@@ -249,7 +250,7 @@ namespace Balikuj.Client.Example.Services
             };
             
             Console.WriteLine("Updating the payment method ...");
-            var orderPaymentMethods = await _client.OrderPaymentMethodUpdate(desiredId, updateModel);
+            var orderPaymentMethods = await _client.Order.PaymentMethodUpdate(desiredId, updateModel);
             Console.WriteLine($"OrderPaymentMethodUpdate StatusCode = {orderPaymentMethods.StatusCode}, Id = {orderPaymentMethods?.Result?.Id}");
             */
 
@@ -271,7 +272,7 @@ namespace Balikuj.Client.Example.Services
             };
             
             Console.WriteLine("Creating the payment method ...");
-            var orderPaymentMethods = await _client.OrderPaymentMethodCreate(updateModel);
+            var orderPaymentMethods = await _client.Order.PaymentMethodCreate(updateModel);
             Console.WriteLine($"OrderPaymentMethodCreate StatusCode = {orderPaymentMethods.StatusCode}, Id = {orderPaymentMethods?.Result?.Id}");
             */
 
@@ -284,7 +285,7 @@ namespace Balikuj.Client.Example.Services
             int desiredId = 8;
             
             Console.WriteLine("Deleting the payment method ...");
-            var orderPaymentMethods = await _client.OrderPaymentMethodDelete(desiredId);
+            var orderPaymentMethods = await _client.Order.PaymentMethodDelete(desiredId);
             Console.WriteLine($"OrderPaymentMethodDelete StatusCode = {orderPaymentMethods.StatusCode}, Success = {orderPaymentMethods?.Result}");
             */
 

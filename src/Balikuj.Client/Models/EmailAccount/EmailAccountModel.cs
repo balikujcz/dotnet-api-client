@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Balikuj.Client.Models.EmailAccount
 {
-    public class EmailAccount
+    public class EmailAccountModel
     {
         public int Id { get; set; }
         /// <summary>
