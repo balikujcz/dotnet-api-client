@@ -4,35 +4,57 @@
     "Method": "Write"
   },
   "RequestDetails": {
-    "RequestUri": "https://localhost:7104/api/Dpd/Cancel",
+    "RequestUri": "https://localhost:7104/api/Dpd/Tracking",
     "RequestMethod": "POST",
-    "RequestHeaders": "X-BalikujAuthToken: 5A3817B22676878834EA43A0CC55179AF914396874C1D2577EDCE028F5D12F600F91E8E227A54A8B76EE9F10F737BFABA0B742A3C97D990E866A3B7F1F401BBE\r\n"
+    "RequestHeaders": "X-BalikujAuthToken: 52911FB0309FE5456E8DA38DE110DC3E915E4165048CB276F30F70C959D443CC78ED6C21C0E5057F8F7F2753C8EEC563B169B9D70921CB6E2C4B23F11D6A9DDE\r\n"
   },
   "RequestContent": {
     "RequestContent": {
       "Packages": [
-        "23755010135025",
-        "23755010135026"
+        "23755010135018",
+        "23755010135019"
       ]
     }
   },
   "Response": {
     "ResponseStatusCode": 200,
-    "ResponseHeaders": "Date: Tue, 11 Jun 2024 13:11:14 GMT\r\nServer: Kestrel\r\nTransfer-Encoding: chunked\r\nX-MiniProfiler-Ids: [\u0022c2c8d485-2b7d-4bf0-855f-92a333b3be4c\u0022,\u00221ccc5439-64f5-46e0-b8ff-06399e837f5a\u0022,\u002299261a75-086b-4c01-8aab-2df3e139a65c\u0022,\u002295360282-dd9e-4f13-8240-51ee9e8a5317\u0022,\u0022d1c3c1b8-4328-49bb-af40-9f7a289b4575\u0022,\u0022a7d1b5d7-8684-46a7-91c2-c5aead5bf272\u0022,\u00225af07ac2-6477-4f02-9c48-3b9f6ce8c788\u0022,\u00220abff897-bebd-45ad-b2e3-afda0c751cb5\u0022,\u0022bba8aae7-aceb-4884-96e0-3e410530441c\u0022,\u00227aa0db95-b5d0-46fd-b99b-1229d9999912\u0022,\u00227b400dd3-5007-48c2-a3b0-8ece33853085\u0022,\u0022eb308664-8f30-4be4-a993-17f039411c4d\u0022,\u0022d2b6e95d-43cd-4df2-8797-1d258291e156\u0022,\u0022213163d3-cd70-4684-81dd-814c672075a5\u0022,\u00220643189f-11b7-45e1-afbc-d579c3087b3c\u0022,\u0022089fbaf2-f9b7-48cb-8ee5-1e10791dbfef\u0022]\r\nX-Correlation-Id: 6ae033a7-dda2-407e-89fe-5133d3984e94\r\n",
+    "ResponseHeaders": "Date: Fri, 14 Jun 2024 08:18:07 GMT\r\nServer: Kestrel\r\nTransfer-Encoding: chunked\r\nX-MiniProfiler-Ids: [\u0022d70686b3-f6de-4e85-b506-7aa619404ea6\u0022,\u002267c470bb-3f12-4d48-bf6c-639f9027d04b\u0022,\u002225a0617a-f991-4d20-b876-47983e4abc4e\u0022,\u0022f4507d4b-b877-47a4-8142-7a519a73e33e\u0022,\u0022d972bf6d-b366-422c-84fe-d2b07b73a329\u0022,\u0022ccf56015-75ac-41ed-9479-5baf0ab48385\u0022]\r\nX-Correlation-Id: d8ccef5a-31a1-4269-b49e-279195e7647e\r\n",
     "ResponseContent": {
       "Result": [
         {
-          "PackageNumberCarrier": "23755010135025",
-          "Successfull": false,
-          "Message": "package.cancel.alreadysent"
+          "PackageNumberCarrier": "23755010135018",
+          "StatusCode": 200,
+          "Message": "OK",
+          "Events": [
+            {
+              "Date": "2024-06-10T10:34:29.042+02:00",
+              "Category": "Created",
+              "Name": "Z\u00E1silka vlo\u017Eena do syst\u00E9mu",
+              "NameSystem": "Z\u00E1silka vlo\u017Eena do syst\u00E9mu",
+              "Type": 1,
+              "Delivered": false,
+              "Canceled": false
+            }
+          ]
         },
         {
-          "PackageNumberCarrier": "23755010135026",
-          "Successfull": false,
-          "Message": "package.cancel.alreadysent"
+          "PackageNumberCarrier": "23755010135019",
+          "StatusCode": 200,
+          "Message": "OK",
+          "Events": [
+            {
+              "Date": "2024-06-10T10:35:44.211+02:00",
+              "Category": "Created",
+              "Name": "Z\u00E1silka vlo\u017Eena do syst\u00E9mu",
+              "NameSystem": "Z\u00E1silka vlo\u017Eena do syst\u00E9mu",
+              "Type": 1,
+              "Delivered": false,
+              "Canceled": false
+            }
+          ]
         }
       ],
-      "CorrelationId": "6ae033a7-dda2-407e-89fe-5133d3984e94",
+      "CorrelationId": "d8ccef5a-31a1-4269-b49e-279195e7647e",
       "StatusCode": 200,
       "Errors": []
     }

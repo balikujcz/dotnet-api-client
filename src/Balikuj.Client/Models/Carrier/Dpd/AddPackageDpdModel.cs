@@ -17,12 +17,6 @@ namespace Balikuj.Client.Models.Carrier.Dpd
         /// </summary>
         public string Reference2 { get; set; }
 
-        // 2023-12-11 - Not used, the number of shipments will be used instead
-        ///// <summary>
-        ///// Number of packages in the shipment
-        ///// </summary>
-        //public int PieceCount { get; set; }
-
         /// <summary>
         /// Total weight of the shipment in kg
         /// </summary>
@@ -115,13 +109,6 @@ namespace Balikuj.Client.Models.Carrier.Dpd
         /// </summary>
         public string InsuranceCurrency { get; set; }
 
-        /*
-        /// <summary>
-        /// Request for "receiver pays for shipping" service
-        /// </summary>
-        public bool? PayByReceiver { get; set; }
-        */
-
         /// <summary>
         /// Custom name of the shipment (order number, etc.)
         /// Only numbers (0-9), letters (a-z, A-Z), hyphen (-), slash (/), underscore (_) are allowed
@@ -133,18 +120,6 @@ namespace Balikuj.Client.Models.Carrier.Dpd
         /// Package number (for multi-package shipments)
         /// </summary>
         public int? PackageNumberOrder { get; set; }
-
-        // 2023-12-11 - Set when selecting the service
-        ///// <summary>
-        ///// ShopToShop
-        ///// </summary>
-        //public bool? ShopToShop { get; set; }
-
-        ///// <summary>
-        ///// ShopToHome
-        ///// </summary>
-        //public bool? ShopToHome { get; set; }
-
 
         /// <summary>
         /// The shipment will be delivered to the Recipient only upon presentation of the original identity document. The Recipient's name must be provided for identity verification.
