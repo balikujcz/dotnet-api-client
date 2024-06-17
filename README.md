@@ -19,7 +19,7 @@ To install the Balíkuj.cz HTTP Client, you can use the NuGet package manager. Ru
 
 ```sh
 dotnet add package BalikujHttpClient
-
+```
 
 ## Configuration
 
