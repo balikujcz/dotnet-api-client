@@ -30,6 +30,7 @@ public static class ApiRuntimeSettings
 {
     public const string ApiKey = "YOURAPIKEY";
 }
+```
 
 ## Usage
 
@@ -71,6 +72,7 @@ namespace Balikuj.Client.Example.Services
         }
     }
 }
+```
 
 ### Running the Example
 In your program.cs file, you can then call the `RunAsync` method of the `ApplicationServiceExample` class to execute the example:
@@ -106,5 +108,5 @@ public class Program
         Console.ReadKey();
     }
 }
-
+```
 
