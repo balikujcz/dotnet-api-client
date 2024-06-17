@@ -47,7 +47,7 @@ namespace Balikuj.Client.Example.Services
             
             Console.WriteLine("Listing application ...");
             var list = await _client.Application.List();
-            Console.WriteLine($"ApplicationCreate StatusCode = {list.StatusCode}, items = {list?.Result?.Total}");
+            Console.WriteLine($"ApplicationList StatusCode = {list.StatusCode}, items = {list?.Result?.Total}");
             
 
             ////////////////////////////
