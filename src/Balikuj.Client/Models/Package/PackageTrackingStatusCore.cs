@@ -21,19 +21,14 @@
 * THE SOFTWARE.
 */
 
-namespace Balikuj.Client.Results
+namespace Balikuj.Client.Models.Package
 {
-    public class ApiBaseResult
+    public class PackageTrackingStatusCore
     {
-        /// <summary>
-        /// Unique identifier of the request in GUID format. It is used for easier tracking of any problematic requests. If an error occurs in the request, send us this identifier for easier identification of the problem within the Balíkuj platform.
-        /// </summary>
-        /// <example>d22127f9-6f76-4e1f-a15b-47ba32e899d0</example>
-        public string CorrelationId { get; set; }
+        public string Code { get; set; }
 
-        /// <summary>
-        /// Status code of the request
-        /// </summary>
-        public int StatusCode { get; set; }
+        public string Category { get; set; }
+
+        public string Description { get; set; }
     }
 }

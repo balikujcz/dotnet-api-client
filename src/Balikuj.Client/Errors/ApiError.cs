@@ -1,7 +1,6 @@
 ﻿/*
 * Copyright (c) 2024 Balíkuj.cz
-* http://www.balikuj.cz
-* Ing. Petr Rympler
+* http://balikuj.cz
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -27,19 +26,19 @@ namespace Balikuj.Client.Errors
     public class ApiError
     {
         /// <summary>
-        /// Kód chyby
+        /// Code of the error
         /// </summary>
         /// <example>404</example>
         public int ErrorCode { get; set; }
 
         /// <summary>
-        /// Text chybového hlášení
+        /// Text of the error message
         /// </summary>
         /// <example>Entity not found</example>
         public string Message { get; set; }
 
         /// <summary>
-        /// ID referencované entity
+        /// ID of the referenced entity
         /// </summary>
         /// <example>DA93782107237</example>
         public string Reference { get; set; }

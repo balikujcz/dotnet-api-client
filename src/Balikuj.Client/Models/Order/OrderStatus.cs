@@ -1,6 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿/*
+* Copyright (c) 2024 Balíkuj.cz
+* http://balikuj.cz
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in
+* all copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+* THE SOFTWARE.
+*/
 
 namespace Balikuj.Client.Models.Order
 {
@@ -30,12 +49,6 @@ namespace Balikuj.Client.Models.Order
         /// Information whether it is a system status. System statuses cannot be deleted, only external status codes can be mapped to them.
         /// </summary>
         public bool IsSystem { get; set; }
-
-        ///// <summary>
-        ///// Information whether the status is editable. System statuses are fixed, they have an ID <= 0 and cannot be edited. Also, it is not yet possible to edit statuses loaded from Eshop applications.
-        ///// Such statuses must always be edited in the settings of the respective eshop. This property is read-only and cannot be changed.
-        ///// </summary>
-        //public bool Editable { get; set; } = false;
 
         /// <summary>
         /// Display order of this status code

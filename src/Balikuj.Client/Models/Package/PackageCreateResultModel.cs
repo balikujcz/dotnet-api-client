@@ -1,4 +1,27 @@
-﻿using Balikuj.Client.Results;
+﻿/*
+* Copyright (c) 2024 Balíkuj.cz
+* http://balikuj.cz
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in
+* all copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+* THE SOFTWARE.
+*/
+
+using Balikuj.Client.Results;
 using System.Collections.Generic;
 
 namespace Balikuj.Client.Models.Package
@@ -8,27 +31,27 @@ namespace Balikuj.Client.Models.Package
         public IEnumerable<T> Result { get; set; }
 
         /// <summary>
-        /// Odkaz na stažení štítků ze zvolených zásilek
+        /// Link to download labels for selected packages
         /// </summary>
         public string LabelsUrl { get; set; }
 
         /// <summary>
-        /// Hash pro tisk štítků
+        /// Hash for label printing
         /// </summary>
         public string LabelsHash { get; set; }
 
         /// <summary>
-        /// Odkaz na stažení objednávek v PDF, pokud byly u zásilek vyplněny ID objednávek
+        /// Link to download orders in PDF, if order IDs were filled in for the packages
         /// </summary>
         public string OrdersUrl { get; set; }
 
         /// <summary>
-        /// Hash pro tisk objednávek
+        /// Hash for order printing
         /// </summary>
         public string OrdersHash { get; set; }
 
         /// <summary>
-        /// Počet úspěšně vytvořených zásilek
+        /// Number of successfully created packages
         /// </summary>
         public int PackagesCount { get; set; }
     }

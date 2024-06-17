@@ -1,7 +1,6 @@
 ﻿/*
 * Copyright (c) 2024 Balíkuj.cz
-* http://www.balikuj.cz
-* Ing. Petr Rympler
+* http://balikuj.cz
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -38,27 +37,10 @@ using Balikuj.Client.Clients.Rule;
 using Balikuj.Client.Clients.Webhook;
 using Balikuj.Client.Configuration;
 using Balikuj.Client.Exceptions;
-using Balikuj.Client.Models.Addresses;
-using Balikuj.Client.Models.Application;
-using Balikuj.Client.Models.Carrier;
-using Balikuj.Client.Models.Carrier.Cp;
-using Balikuj.Client.Models.EmailAccount;
-using Balikuj.Client.Models.EmailTemplate;
-using Balikuj.Client.Models.Label;
-using Balikuj.Client.Models.Order;
-using Balikuj.Client.Models.Picking;
-using Balikuj.Client.Models.Pickup;
-using Balikuj.Client.Models.Printer;
-using Balikuj.Client.Models.Rule;
-using Balikuj.Client.Models.Webhooks;
-using Balikuj.Client.Results;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace Balikuj.Client
 {
@@ -108,7 +90,40 @@ namespace Balikuj.Client
         #endregion
 
 
-        
+        #region Private Methods
+
+        private HttpRequestMessage CreateRequest(string endpoint, HttpMethod method, string query = null)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey))
+                throw new BalikujException("Login is required to send data");
+
+            var requestUrl = GetApiUrl(endpoint);
+
+            if (!string.IsNullOrEmpty(query))
+                requestUrl += $"?{query}";
+
+            var request = new HttpRequestMessage(method, requestUrl);
+            request.Headers.Add(BalikujSettings.ApiHeaderName, _apiKey);
+
+            return request;
+        }
+
+        private string GetApiUrl(string endpoint)
+        {
+            var apiUrl = BalikujSettings.ApiBaseUrl;
+            if (!string.IsNullOrEmpty(BalikujSettings.ApiVersion))
+                apiUrl += $"/{BalikujSettings.ApiVersion}";
+
+            apiUrl += $"/{endpoint}";
+
+            return apiUrl;
+        }
+
+        #endregion
+
+
+        #region Clients
+
         // Account
         private AccountClient _accountClient;
         public AccountClient Account
@@ -290,78 +305,10 @@ namespace Balikuj.Client
             }
         }
 
-        // Carrier
-        //private CarrierClient _carrierClient;
-        //public CarrierClient Carrier
-        //{
-        //    get
-        //    {
-        //        if (_carrierClient == null)
-        //            _carrierClient = new CarrierClient(_httpClient, _apiKey);
-
-        //        return _carrierClient;
-        //    }
-        //}
-
         private CarrierClient _carrierClient;
         public CarrierClient Carrier => _carrierClient ?? (_carrierClient = new CarrierClient(_httpClient, _apiKey));
 
-        // var query = await _client.Carrier.Cp.GetAsync<AddPackageCpModel>(10);
-
-        // var createResult = await _client.Carrier.Cp.CreateAsync([new AddPackageCpModel { RecName = "František Hromek", RecStreet = "Vavrečkova 7074", ServiceType = "DR" }]);
-
-
-
-
-        
-     
-        #region Carriers
-
-
-        #region CP
-
-
-        
-
-
         #endregion
 
-        #endregion
-
-
-
-
-
-
-        #region Private Methods
-
-        private HttpRequestMessage CreateRequest(string endpoint, HttpMethod method, string query = null)
-        {
-            if (string.IsNullOrWhiteSpace(_apiKey))
-                throw new BalikujException("Login is required to send data");
-
-            var requestUrl = GetApiUrl(endpoint);
-
-            if (!string.IsNullOrEmpty(query))
-                requestUrl += $"?{query}";
-
-            var request = new HttpRequestMessage(method, requestUrl);
-            request.Headers.Add(BalikujSettings.ApiHeaderName, _apiKey);
-
-            return request;
-        }
-
-        private string GetApiUrl(string endpoint)
-        {
-            var apiUrl = BalikujSettings.ApiBaseUrl;
-            if (!string.IsNullOrEmpty(BalikujSettings.ApiVersion))
-                apiUrl += $"/{BalikujSettings.ApiVersion}";
-
-            apiUrl += $"/{endpoint}";
-
-            return apiUrl;
-        }
-
-        #endregion
     }
 }

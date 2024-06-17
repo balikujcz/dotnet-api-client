@@ -21,19 +21,25 @@
 * THE SOFTWARE.
 */
 
-namespace Balikuj.Client.Results
+using System.Collections.Generic;
+
+namespace Balikuj.Client.Models.Label
 {
-    public class ApiBaseResult
+    public class LabelPackageModel
     {
         /// <summary>
-        /// Unique identifier of the request in GUID format. It is used for easier tracking of any problematic requests. If an error occurs in the request, send us this identifier for easier identification of the problem within the Balíkuj platform.
-        /// </summary>
-        /// <example>d22127f9-6f76-4e1f-a15b-47ba32e899d0</example>
-        public string CorrelationId { get; set; }
+        /// List of package numbers
+		/// </summary>
+		public List<int> Packages { get; set; }
 
         /// <summary>
-        /// Status code of the request
+        /// Number of positions to skip
         /// </summary>
-        public int StatusCode { get; set; }
+        public int? Skip { get; set; }
+
+        /// <summary>
+        /// Information whether to print one label per page
+        /// </summary>
+        public bool? OnePerPage { get; set; }
     }
 }

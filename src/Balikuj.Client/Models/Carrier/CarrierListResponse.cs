@@ -1,42 +1,63 @@
-﻿using System;
-using System.Collections.Generic;
+﻿/*
+* Copyright (c) 2024 Balíkuj.cz
+* http://balikuj.cz
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in
+* all copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+* THE SOFTWARE.
+*/
+
+using System;
 using System.ComponentModel;
-using System.Text;
 
 namespace Balikuj.Client.Models.Carrier
 {
     public class CarrierListResponse
     {
         /// <summary>
-		/// Jméno dopravce
-		/// </summary>
-		/// <example>PPL CZ s.r.o.</example>
-		public string Name { get; set; }
+        /// Carrier name
+        /// </summary>
+        /// <example>PPL CZ s.r.o.</example>
+        public string Name { get; set; }
 
 
         /// <summary>
-        /// Kód dopravce - slouží k párování dopravců u zásilek a objednávek
+        /// Carrier code - used for matching carriers in shipments and orders
         /// </summary>
         /// <example>PPL</example>
         public string Code { get; set; }
 
 
         /// <summary>
-        /// Popis dopravce
+        /// Carrier description
         /// </summary>
-        /// <example>Balíková přeprava PPL CZ s.r.o.</example>
+        /// <example>PPL CZ package transport s.r.o.</example>
         public string Description { get; set; }
 
 
         /// <summary>
-        /// Datum aktivace dopravce, pokud již byl aktivován
+        /// Carrier activation date, if already activated
         /// </summary>
         /// <example>2023-11-30T16:57:35.646646</example>
         public DateTime? Activated { get; set; }
 
 
         /// <summary>
-        /// Stav dopravce pro aktuálního uživatele
+        /// Carrier status for the current user
         /// </summary>
         /// <example>Active</example>
         [DefaultValue(CustomerCarrierActivationStatus.Inactive)]

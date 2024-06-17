@@ -1,4 +1,27 @@
-﻿using Balikuj.Client.Models.Application;
+﻿/*
+* Copyright (c) 2024 Balíkuj.cz
+* http://balikuj.cz
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in
+* all copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+* THE SOFTWARE.
+*/
+
+using Balikuj.Client.Models.Application;
 using System.Text.Json;
 
 
@@ -21,38 +44,38 @@ namespace Balikuj.Client.Example.Services
             ////////////////////////////
             //// Application list
             ////////////////////////////
-            /*
+            
             Console.WriteLine("Creating new application ...");
-            var application = await _client.Application.List();
-            Console.WriteLine($"ApplicationCreate StatusCode = {application.StatusCode}, items = {application?.Result?.Total}");
-            */
+            var list = await _client.Application.List();
+            Console.WriteLine($"ApplicationCreate StatusCode = {list.StatusCode}, items = {list?.Result?.Total}");
+            
 
             ////////////////////////////
             //// application get
             ////////////////////////////
-            /*
+            
             int applicationId = 2;
 
             Console.WriteLine("Getting the application ...");
-            var application = await _client.Application.Get(applicationId);
-            Console.WriteLine($"ApplicationGet StatusCode = {application.StatusCode}");
-            */
+            var applicationGet = await _client.Application.Get(applicationId);
+            Console.WriteLine($"ApplicationGet StatusCode = {applicationGet.StatusCode}");
+            
 
 
             ////////////////////////////
             /// Application types
             /// /////////////////////////
-            /*
+            
             Console.WriteLine("Getting application types ...");
-            var application = await _client.Application.Types();
-            Console.WriteLine($"ApplicationCreate StatusCode = {application.StatusCode}, result = {application?.Result}");
-            */
+            var applicationTypes = await _client.Application.Types();
+            Console.WriteLine($"ApplicationCreate StatusCode = {applicationTypes.StatusCode}, result = {applicationTypes?.Result}");
+            
 
 
             ////////////////////////////
-            /// Application update            - model
+            /// Application update      
             /// /////////////////////////
-            /*
+            
             int id = 2;
             var applicationModel = new ApplicationModel
             {
@@ -88,9 +111,9 @@ namespace Balikuj.Client.Example.Services
             };
 
             Console.WriteLine("Updating application types ...");
-            var application = await _client.Application.Update(id, applicationModel);
-            Console.WriteLine($"ApplicationUpdate StatusCode = {application.StatusCode}, result = {application?.Result.Status}");
-            */
+            var applicationUpdate = await _client.Application.Update(id, applicationModel);
+            Console.WriteLine($"ApplicationUpdate StatusCode = {applicationUpdate.StatusCode}, result = {applicationUpdate?.Result.Status}");
+            
 
 
 
@@ -99,18 +122,19 @@ namespace Balikuj.Client.Example.Services
             /// /////////////////////////
             /*
             int applicationId = 1;
+            */
 
             Console.WriteLine("Deleting application ...");
-            var application = await _client.Application.Delete(applicationId);
-            Console.WriteLine($"ApplicationDelete StatusCode = {application.StatusCode}, result = {application?.Result}");
-            */
+            var applicationDelete = await _client.Application.Delete(applicationId);
+            Console.WriteLine($"ApplicationDelete StatusCode = {applicationDelete.StatusCode}, result = {applicationDelete?.Result}");
+            
 
 
             ////////////////////////////
             /// Application create
             /// /////////////////////////
-            /*
-            var model = new ApplicationActivateModel
+            
+            var createModel = new ApplicationActivateModel
             {
                 Code = "UPGATES",
                 AdditionalProperties = new Dictionary<string, JsonElement>
@@ -124,31 +148,30 @@ namespace Balikuj.Client.Example.Services
             };
 
             Console.WriteLine("Creating application ...");
-            var application = await _client.Application.Create(model);
-            Console.WriteLine($"ApplicationDelete StatusCode = {application.StatusCode}, result = {application?.Result}");
-            */
+            var applicationCreate = await _client.Application.Create(createModel);
+            Console.WriteLine($"ApplicationDelete StatusCode = {applicationCreate.StatusCode}, result = {applicationCreate?.Result}");
+            
 
 
 
             ////////////////////////////
             /// Application carrier mappings
             /// /////////////////////////
-            
-             /*
-             int applicationId = 2;
-
+             
+             // int applicationId = 2;
+             
              Console.WriteLine("Loading application carrier mappings ...");
-             var application = await _client.Application.CarrierMappings(applicationId);
-             Console.WriteLine($"ApplicationCarrierMappings StatusCode = {application.StatusCode}, result = {application?.Result}");
+             var applicationCarrierMapping = await _client.Application.CarrierMappings(applicationId);
+             Console.WriteLine($"ApplicationCarrierMappings StatusCode = {applicationCarrierMapping.StatusCode}, result = {applicationCarrierMapping?.Result}");
             
-             */
+             
 
 
-            ////////////////////////////
+            //////////////////////////////////////
             /// Application carrier mapping create
-            /// /////////////////////////
-            /*
-            int applicationId = 2;
+            /// //////////////////////////////////
+            
+            // int applicationId = 2;
 
             var model = new ApplicationCarrierModel
             {
@@ -163,35 +186,35 @@ namespace Balikuj.Client.Example.Services
             };
 
             Console.WriteLine("Creating application carrier mapping ...");
-            var application = await _client.Application.CarrierMappingCreate(applicationId, model);
-            Console.WriteLine($"ApplicationCarrierMappingCreate StatusCode = {application.StatusCode}, result = {application?.Result}");
-            */
+            var applicationMappingCreate = await _client.Application.CarrierMappingCreate(applicationId, model);
+            Console.WriteLine($"ApplicationCarrierMappingCreate StatusCode = {applicationMappingCreate.StatusCode}, result = {applicationMappingCreate?.Result}");
+            
             
 
 
             ////////////////////////////
             /// Application carrier mapping get 
             /// /////////////////////////
-            /*
             
-             int applicationId = 2;
+            
+             // int applicationId = 2;
              int mappingId = 3;
 
              Console.WriteLine("Loading application carrier mapping ...");
-             var application = await _client.Application.CarrierMappingGet(mappingId, applicationId);
-             Console.WriteLine($"ApplicationCarrierMappingGet StatusCode = {application.StatusCode}, result = {application?.Result}");
-            */
+             var applicationMappingGet = await _client.Application.CarrierMappingGet(mappingId, applicationId);
+             Console.WriteLine($"ApplicationCarrierMappingGet StatusCode = {applicationMappingGet.StatusCode}, result = {applicationMappingGet?.Result}");
+            
 
 
             ////////////////////////////
             /// Application carrier mapping update
             /// /////////////////////////
-            /*
             
-            int applicationId = 2;
-            int mappingId = 3;
+            
+            // int applicationId = 2;
+            // int mappingId = 3;
 
-            var model = new ApplicationCarrierModel
+            var updateModel = new ApplicationCarrierModel
             {
                 Id = 3,
                 ApplicationId = 2,
@@ -204,9 +227,9 @@ namespace Balikuj.Client.Example.Services
             };
 
              Console.WriteLine("Loading application carrier mapping ...");
-             var application = await _client.Application.CarrierMappingUpdate(mappingId, applicationId, model);
-             Console.WriteLine($"ApplicationCarrierMappingUpdate StatusCode = {application.StatusCode}, result = {application?.Result}");            
-            */
+             var applicationCarrierUpdate = await _client.Application.CarrierMappingUpdate(mappingId, applicationId, updateModel);
+             Console.WriteLine($"ApplicationCarrierMappingUpdate StatusCode = {applicationCarrierUpdate.StatusCode}, result = {applicationCarrierUpdate?.Result}");            
+            
 
 
 
@@ -214,15 +237,15 @@ namespace Balikuj.Client.Example.Services
             /// Application carrier mapping delete
             /// /////////////////////////
 
-            /*
-            int applicationId = 2;
-            int mappingId = 6;
+            
+            // int applicationId = 2;
+            // int mappingId = 6;
 
              Console.WriteLine("Loading application carrier mapping ...");
-             var application = await _client.Application.CarrierMappingDelete(mappingId, applicationId);
-             Console.WriteLine($"ApplicationCarrierMappingDelete StatusCode = {application.StatusCode}, result = {application?.Result}");
+             var applicationCarrierDelete = await _client.Application.CarrierMappingDelete(mappingId, applicationId);
+             Console.WriteLine($"ApplicationCarrierMappingDelete StatusCode = {applicationCarrierDelete.StatusCode}, result = {applicationCarrierDelete?.Result}");
             
-            */
+            
 
 
 
