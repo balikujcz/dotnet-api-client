@@ -35,7 +35,6 @@ namespace Balikuj.Client.Clients.Printer
     public class PrinterClient : BaseClient
     {
         private readonly HttpClient _httpClient;
-        private readonly string _apiKey;
 
         public PrinterClient(HttpClient httpClient, string apiKey) : base(apiKey)
         {

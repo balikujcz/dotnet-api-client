@@ -35,7 +35,6 @@ namespace Balikuj.Client.Clients.Label
     public class LabelClient : BaseClient
     {
         private readonly HttpClient _httpClient;
-        private readonly string _apiKey;
 
         public LabelClient(HttpClient httpClient, string apiKey) : base(apiKey)
         {

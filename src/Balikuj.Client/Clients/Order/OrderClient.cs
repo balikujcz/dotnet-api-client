@@ -35,7 +35,6 @@ namespace Balikuj.Client.Clients.Order
     public class OrderClient : BaseClient
     {
         private readonly HttpClient _httpClient;
-        private readonly string _apiKey;
 
         public OrderClient(HttpClient httpClient, string apiKey) : base(apiKey)
         {

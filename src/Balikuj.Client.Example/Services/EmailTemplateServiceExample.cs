@@ -32,8 +32,6 @@ namespace Balikuj.Client.Example.Services
         public EmailTemplateServiceExample(BalikujClient client)
         {
             _client = client;
-
-            _client.SetApiKey(ApiRuntimeSettings.ApiKey);
         }
 
         public async Task RunAsync()

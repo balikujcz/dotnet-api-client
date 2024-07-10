@@ -34,7 +34,6 @@ namespace Balikuj.Client.Clients.Address
     public class AddressClient : BaseClient
     {
         private readonly HttpClient _httpClient;
-        private readonly string _apiKey;
 
         public AddressClient(HttpClient httpClient, string apiKey) : base(apiKey)
         {

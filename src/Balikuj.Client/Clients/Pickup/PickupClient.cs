@@ -34,7 +34,6 @@ namespace Balikuj.Client.Clients.Pickup
     public class PickupClient : BaseClient
     {
         private readonly HttpClient _httpClient;
-        private readonly string _apiKey;
 
         public PickupClient(HttpClient httpClient, string apiKey) : base(apiKey)
         {

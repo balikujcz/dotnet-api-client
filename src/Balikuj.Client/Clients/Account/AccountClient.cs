@@ -35,7 +35,6 @@ namespace Balikuj.Client.Clients.Account
     public class AccountClient : BaseClient
     {
         private readonly HttpClient _httpClient;
-        private readonly string _apiKey;
 
         public AccountClient(HttpClient httpClient, string apiKey) : base(apiKey)
         {
@@ -60,14 +59,21 @@ namespace Balikuj.Client.Clients.Account
             if (string.IsNullOrWhiteSpace(model.Language))
                 throw new ArgumentNullException(nameof(model.Language), "Language is required");
 
-            var httpRequest = CreateRequest("Account/Login", HttpMethod.Post);
+
+            var httpRequest = CreateRequest("Account/Login", HttpMethod.Post, null, false);
             httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
             var httpResponse = await _httpClient.SendAsync(httpRequest);
 
-            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
-            var response = await JsonSerializer.DeserializeAsync<ApiResult<AccountLoginResponse>>(responseStream, _jsonSerializerOptions);
+            var responseStream = await httpResponse.Content.ReadAsStringAsync();
+            var response = JsonSerializer.Deserialize<ApiResult<AccountLoginResponse>>(responseStream, _jsonSerializerOptions);
 
             response.StatusCode = (int)httpResponse.StatusCode;
+
+            if (response.StatusCode == 200)
+            {
+                SetApiKey(response.Result.AuthToken);
+            }
+
             return response;
         }
 
@@ -80,8 +86,8 @@ namespace Balikuj.Client.Clients.Account
             var httpRequest = CreateRequest("Account/Logout", HttpMethod.Post);
             var httpResponse = await _httpClient.SendAsync(httpRequest);
 
-            var responseStream = await httpResponse.Content.ReadAsStreamAsync();
-            var response = await JsonSerializer.DeserializeAsync<ApiResult<bool>>(responseStream, _jsonSerializerOptions);
+            var responseStream = await httpResponse.Content.ReadAsStringAsync();
+            var response = JsonSerializer.Deserialize<ApiResult<bool>>(responseStream, _jsonSerializerOptions);
 
             response.StatusCode = (int)httpResponse.StatusCode;
             return response;

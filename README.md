@@ -23,59 +23,71 @@ dotnet add package BalikujHttpClient
 
 ## ✨ Configuration
 
-To use the Balíkuj HTTP Client, you need to provide your API key. You can do this by setting the field `Apikey` in Balikuj.Client.Example file **ApiRuntimeSettings.cs** property of the `BalikujHttpClient` class. Here's an example of how to configure the client:
+To use the Balíkuj HTTP Client, you need to provide your API key. To receive an API key perform a login request to the Balíkuj API as in example below.
+To set a new API key, you can use the `SetApiKey` method of the `BalikujClient` class. This method will set the API key across the client.
 
-```csharp
-public static class ApiRuntimeSettings
-{
-    public const string ApiKey = "YOURAPIKEY";
-}
-```
 
 ## ✨ Usage
 
-The Balíkuj HTTP Client library provides pre-written methods for all supported endpoints, making it easy to interact with the Balíkuj API. Each API controller has an associated `ServiceExample` file, which demonstrates how to call the methods of the HTTP client. These examples show you how to set the required models, pass IDs, and handle responses. You can find all exmaples in Balikuj.Client.Example "Services" folder.
+The Balíkuj HTTP Client library provides pre-written methods for all supported endpoints, making it easy to interact with the Balíkuj API. Each API controller has an associated `ServiceExample` file, 
+which demonstrates how to call the methods of the HTTP client. These examples show you how to set the required models, pass IDs, and handle responses. You can find all exmaples in Balikuj.Client.Example "Services" folder.
 
-### Example: Getting a list of applications
+### Example: Logging in and receiving an API key
 
-Here's a basic example of how to call Application endpoint to get list of applications:
+Here's a basic example of how to call Account endpoint to log in and receive an API key:
 
 ```csharp
-using Balikuj.Client.Models.Application;
-using System.Text.Json;
+using Balikuj.Client.Models.Account;
+using System.Net;
 
 namespace Balikuj.Client.Example.Services
 {
-    public class ApplicationServiceExample
+    public class AccountServiceExample
     {
         private readonly BalikujClient _client;
 
-        public ApplicationServiceExample(BalikujClient client)
+        public AccountServiceExample(BalikujClient client)
         {
             _client = client;
-
-            _client.SetApiKey(ApiRuntimeSettings.ApiKey);
         }
 
         public async Task RunAsync()
         {
-            
-            ////////////////////////////
-            //// Application list
-            ////////////////////////////
-            
-            Console.WriteLine("Listing application ...");
-            var list = await _client.Application.List();
-            Console.WriteLine($"ApplicationList StatusCode = {list.StatusCode}, items = {list?.Result?.Total}");
-            
 
+            //////////////////
+            /// Account Login
+            //////////////////
+            
+            
+            var loginModel = new AccountLoginRequest
+            {
+                Email = "info@email.cz",
+                Password = "pass",
+                Language = "cs-CZ",
+                Code = null
+            };
+
+
+            Console.WriteLine("Logging in ...");
+            var accountLogin = await _client.Account.LoginAsync(loginModel);
+            Console.WriteLine($"Login StatusCode = {accountLogin.StatusCode}, Expires in = {accountLogin?.Result.ExpiresIn}");
+
+            if (accountLogin?.StatusCode == (int)HttpStatusCode.OK)
+            {
+                Console.WriteLine($"AuthToken = {accountLogin?.Result.AuthToken}");
+                _client.SetApiKey(accountLogin?.Result.AuthToken);
+            }
+           
         }
+
     }
 }
 ```
 
+
+
 ### Running the Example
-In your program.cs file, you can then call the `RunAsync` method of the `ApplicationServiceExample` class to execute the example:
+In your program.cs file, you can then call the `RunAsync` method of the `AccountServiceExample` class to execute the example:
 
 ```csharp
 using Balikuj.Client.Configuration;
@@ -95,14 +107,14 @@ public class Program
             .ConfigureServices(services =>
             {
                 services.AddHttpClient<BalikujClient>();
-                services.AddSingleton<ApplicationServiceExample>();
+                services.AddSingleton<AccountServiceExample>();
             })
             .Build();
 
         BalikujSettings.ApiBaseUrl = "https://api.balikuj.cz/api";
 
-        // Application example
-        await host.Services.GetService<ApplicationServiceExample>()!.RunAsync();
+        // Account example
+        await host.Services.GetService<AccountServiceExample>()!.RunAsync();
 
         Console.WriteLine("Press any key to exit...");
         Console.ReadKey();

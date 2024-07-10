@@ -41,6 +41,7 @@ public class Program
                 services.AddHttpClient<BalikujClient>();
 
                 services.AddSingleton<AddressServiceExample>();
+                services.AddSingleton<AccountServiceExample>();
                 services.AddSingleton<WebhookServiceExample>();
                 services.AddSingleton<ApplicationServiceExample>();
                 services.AddSingleton<CarrierServiceExample>();
@@ -61,6 +62,9 @@ public class Program
 
         // Addresses example
         //await host.Services.GetService<AddressServiceExample>()!.RunAsync();
+
+        // Account example
+        //await host.Services.GetService<AccountServiceExample>()!.RunAsync();
 
         // Webhook example
         //await host.Services.GetService<WebhookServiceExample>()!.RunAsync();

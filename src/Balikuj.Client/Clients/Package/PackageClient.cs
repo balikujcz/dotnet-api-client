@@ -35,7 +35,6 @@ namespace Balikuj.Client.Clients.Package
     public class PackageClient : BaseClient
     {
         private readonly HttpClient _httpClient;
-        private readonly string _apiKey;
 
         public PackageClient(HttpClient httpClient, string apiKey) : base(apiKey)
         {

@@ -35,7 +35,6 @@ namespace Balikuj.Client.Clients.Webhook
     public class WebhookClient : BaseClient
     {
         private readonly HttpClient _httpClient;
-        private readonly string _apiKey;
 
         public WebhookClient(HttpClient httpClient, string apiKey) : base(apiKey)
         {

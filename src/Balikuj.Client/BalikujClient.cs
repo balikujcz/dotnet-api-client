@@ -64,7 +64,7 @@ namespace Balikuj.Client
         }
 
 
-        private string _apiKey { get; set; }
+        private static string _apiKey { get; set; }
 
         public string ApiKey { get { return _apiKey; } private set { } }
 
@@ -80,10 +80,22 @@ namespace Balikuj.Client
         /// <exception cref="ArgumentNullException"></exception>
         public void SetApiKey(string apiKey)
         {
-            if (string.IsNullOrWhiteSpace(apiKey))
-                throw new ArgumentNullException(nameof(apiKey), "ApiKey");
 
             _apiKey = apiKey;
+            if (_accountClient != null) _accountClient.SetApiKey(apiKey);
+            if (_addressClient != null) _addressClient.SetApiKey(apiKey);
+            if (_applicationClient != null) _applicationClient.SetApiKey(apiKey);
+            if (_carrierClient != null) _carrierClient.SetApiKey(apiKey);
+            if (_emailAccountClient != null) _emailAccountClient.SetApiKey(apiKey);
+            if (_emailTemplateClient != null) _emailTemplateClient.SetApiKey(apiKey);
+            if (_labelClient != null) _labelClient.SetApiKey(apiKey);
+            if (_orderClient != null) _orderClient.SetApiKey(apiKey);
+            if (_packageClient != null) _packageClient.SetApiKey(apiKey);
+            if (_pickingClient != null) _pickingClient.SetApiKey(apiKey);
+            if (_pickupClient != null) _pickupClient.SetApiKey(apiKey);
+            if (_printerClient != null) _printerClient.SetApiKey(apiKey);
+            if (_ruleClient != null) _ruleClient.SetApiKey(apiKey);
+            if (_webhookClient != null) _webhookClient.SetApiKey(apiKey);
         }
 
 
@@ -182,7 +194,7 @@ namespace Balikuj.Client
 
 
         // EmailTemplate
-        private EmailTemplateClient _emailTemplateClient;
+        private EmailTemplateClient _emailTemplateClient = null;
         public EmailTemplateClient EmailTemplate
         {
             get

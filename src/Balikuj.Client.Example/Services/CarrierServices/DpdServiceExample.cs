@@ -35,8 +35,6 @@ namespace Balikuj.Client.Example.Services.CarrierServices
         public DpdServiceExample(BalikujClient client)
         {
             _client = client;
-
-            _client.SetApiKey(ApiRuntimeSettings.ApiKey);
         }
 
         public async Task RunAsync()
@@ -53,7 +51,7 @@ namespace Balikuj.Client.Example.Services.CarrierServices
             Console.WriteLine($"DpdGet StatusCode = {result.StatusCode}, Count = {result?.Result.Count}");
             
 
-
+            
             ////////////////
             /// CREATE
             ///////////////
@@ -211,7 +209,7 @@ namespace Balikuj.Client.Example.Services.CarrierServices
             var trackingResult = await _client.Carrier.Dpd.Tracking(trackingModel);
             Console.WriteLine($"DpdBranches StatusCode = {trackingResult.StatusCode}, Count = {trackingResult?.Result.Count()}");
             
-
+            
         }
     }
 }

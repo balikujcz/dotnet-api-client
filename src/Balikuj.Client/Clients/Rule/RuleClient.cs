@@ -35,7 +35,6 @@ namespace Balikuj.Client.Clients.Rule
     public class RuleClient : BaseClient
     {
         private readonly HttpClient _httpClient;
-        private readonly string _apiKey;
 
         public RuleClient(HttpClient httpClient, string apiKey) : base(apiKey)
         {

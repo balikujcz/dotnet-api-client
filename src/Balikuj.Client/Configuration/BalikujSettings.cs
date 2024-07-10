@@ -30,5 +30,6 @@ namespace Balikuj.Client.Configuration
         public static string ApiBaseUrl = "https://api.balikuj.cz/api";
 
         public static string ApiVersion = "";
+
     }
 }

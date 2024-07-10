@@ -33,8 +33,6 @@ public class WebhookServiceExample
     public WebhookServiceExample(BalikujClient client)
     {
         _client = client;
-
-        _client.SetApiKey(ApiRuntimeSettings.ApiKey);
     }
 
     public async Task RunAsync()
@@ -47,7 +45,6 @@ public class WebhookServiceExample
         var webhook = await _client.Webhook.List();
         Console.WriteLine($"Adress StatusCode = {webhook.StatusCode}, count = {webhook?.Result?.Total}");
         
-
 
         /////////////////////////////
         // Get list of webhook events
@@ -84,6 +81,7 @@ public class WebhookServiceExample
                 }
             }
         };
+
         Console.WriteLine("Creating webhook events ...");
         var webhookCreateResult = await _client.Webhook.Create(webhookCreateModel);
         Console.WriteLine($"WebhookCreate StatusCode = {webhookCreateResult.StatusCode}, items = {webhookCreateResult?.Result?.Webhooks.Count}");

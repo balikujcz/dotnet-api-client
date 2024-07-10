@@ -34,7 +34,6 @@ namespace Balikuj.Client.Clients.Picking
     public class PickingClient : BaseClient
     {
         private readonly HttpClient _httpClient;
-        private readonly string _apiKey;
 
         public PickingClient(HttpClient httpClient, string apiKey) : base(apiKey)
         {

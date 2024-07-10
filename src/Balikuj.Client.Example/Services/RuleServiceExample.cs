@@ -32,8 +32,6 @@ namespace Balikuj.Client.Example.Services
         public RuleServiceExample(BalikujClient client)
         {
             _client = client;
-
-            _client.SetApiKey(ApiRuntimeSettings.ApiKey);
         }
 
         public async Task RunAsync()
@@ -47,7 +45,7 @@ namespace Balikuj.Client.Example.Services
             var ruleList = await _client.Rule.List();
             Console.WriteLine($"RuleList StatusCode = {ruleList.StatusCode}, Count = {ruleList?.Result?.Total}");
             
-
+            
             ///////////////
             /// Rule fields
             //////////////
@@ -229,7 +227,7 @@ namespace Balikuj.Client.Example.Services
             var movedRuleDown = await _client.Rule.MoveDown(desiredId);
             Console.WriteLine($"RuleMoveDown StatusCode = {movedRuleDown.StatusCode}, Success = {movedRuleDown?.Result}");
             
-
+            
         }
     }
 }

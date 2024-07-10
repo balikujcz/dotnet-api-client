@@ -32,11 +32,7 @@ namespace Balikuj.Client.Example.Services
         public EmailAccountServiceExample(BalikujClient client)
         {
             _client = client;
-
-            _client.SetApiKey(ApiRuntimeSettings.ApiKey);
         }
-
-
 
         public async Task RunAsync()
         {
@@ -44,7 +40,7 @@ namespace Balikuj.Client.Example.Services
             /// Email list
             /////////////////////
             
-            
+
             Console.WriteLine("Getting email accounts ...");
             var emailList = await _client.EmailAccount.List();
             Console.WriteLine($"EmailList StatusCode = {emailList.StatusCode}, count = {emailList?.Result?.Total}");

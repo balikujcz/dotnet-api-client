@@ -33,8 +33,6 @@ namespace Balikuj.Client.Example.Services
         public PackageServiceExample(BalikujClient client)
         {
             _client = client;
-
-            _client.SetApiKey(ApiRuntimeSettings.ApiKey);
         }
 
         public async Task RunAsync()

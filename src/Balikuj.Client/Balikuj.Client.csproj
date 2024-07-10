@@ -2,12 +2,29 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>BalikujHttpClient</PackageId>
+    <Title>Balikuj Http Client</Title>
+    <Company>Balikuj</Company>
+    <Description>Balikuj HTTP Client is a .NET library designed to simplify interaction with the Balíkuj API. It includes all models required for API manipulation, pre-written methods for all supported endpoints, and easy configuration for API keys and basic settings.</Description>
+    <RepositoryUrl>https://github.com/balikujcz/dotnet-api-client</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>Balikuj,HttpClient</PackageTags>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="Utils\**" />
     <EmbeddedResource Remove="Utils\**" />
     <None Remove="Utils\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

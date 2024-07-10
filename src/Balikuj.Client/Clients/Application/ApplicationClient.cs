@@ -35,7 +35,6 @@ namespace Balikuj.Client.Clients.Application
     public class ApplicationClient : BaseClient
     {
         private readonly HttpClient _httpClient;
-        private readonly string _apiKey;
 
         public ApplicationClient(HttpClient httpClient, string apiKey) : base(apiKey)
         {

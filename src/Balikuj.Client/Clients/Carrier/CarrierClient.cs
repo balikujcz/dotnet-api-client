@@ -36,7 +36,6 @@ namespace Balikuj.Client.Clients.Carrier
     public class CarrierClient : BaseClient
     {
         private readonly HttpClient _httpClient;
-        private readonly string _apiKey;
 
         public CarrierClient(HttpClient httpClient, string apiKey) : base(apiKey)
         {

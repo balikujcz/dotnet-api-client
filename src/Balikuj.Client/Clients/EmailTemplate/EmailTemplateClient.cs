@@ -34,7 +34,6 @@ namespace Balikuj.Client.Clients.EmailTemplate
     public class EmailTemplateClient : BaseClient
     {
         private readonly HttpClient _httpClient;
-        private readonly string _apiKey;
 
         public EmailTemplateClient(HttpClient httpClient, string apiKey) : base(apiKey)
         {

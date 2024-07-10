@@ -22,18 +22,17 @@
 */
 
 using Balikuj.Client.Models.Account;
+using System.Net;
 
 namespace Balikuj.Client.Example.Services
 {
-    internal class AccountServiceExample
+    public class AccountServiceExample
     {
         private readonly BalikujClient _client;
 
         public AccountServiceExample(BalikujClient client)
         {
             _client = client;
-
-            _client.SetApiKey(ApiRuntimeSettings.ApiKey);
         }
 
         public async Task RunAsync()
@@ -47,7 +46,7 @@ namespace Balikuj.Client.Example.Services
             var loginModel = new AccountLoginRequest
             {
                 Email = "info@email.cz",
-                Password = "password",
+                Password = "pass",
                 Language = "cs-CZ",
                 Code = null
             };
@@ -56,9 +55,14 @@ namespace Balikuj.Client.Example.Services
             Console.WriteLine("Logging in ...");
             var accountLogin = await _client.Account.LoginAsync(loginModel);
             Console.WriteLine($"Login StatusCode = {accountLogin.StatusCode}, Expires in = {accountLogin?.Result.ExpiresIn}");
+
+            if (accountLogin?.StatusCode == (int)HttpStatusCode.OK)
+            {
+                Console.WriteLine($"AuthToken = {accountLogin?.Result.AuthToken}");
+                _client.SetApiKey(accountLogin?.Result.AuthToken);
+            }
+
             
-
-
             //////////////////
             /// Account Logout
             //////////////////
@@ -102,11 +106,7 @@ namespace Balikuj.Client.Example.Services
             Console.WriteLine("Updating account info ...");
             var updateAccount = await _client.Account.InfoUpdateAsync(infoUpdateModel);
             Console.WriteLine($"InfoUpdate StatusCode = {updateAccount.StatusCode}, Success = {updateAccount?.Result}");
-            
-
-
-
-
+           
         }
 
     }

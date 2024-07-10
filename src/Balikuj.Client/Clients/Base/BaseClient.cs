@@ -23,6 +23,7 @@
 
 using Balikuj.Client.Configuration;
 using Balikuj.Client.Exceptions;
+using System;
 using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -38,26 +39,39 @@ namespace Balikuj.Client.Clients.Base
             Converters = { new JsonStringEnumConverter() }
         };
 
-        private string _apiKey;
+        protected string _apiKey;
 
         public BaseClient(string apiKey)
         {
             _apiKey = apiKey;
         }
 
-
-        protected HttpRequestMessage CreateRequest(string endpoint, HttpMethod method, string query = null)
+        public void SetApiKey(string apiKey)
         {
-            if (string.IsNullOrWhiteSpace(_apiKey))
+            if (string.IsNullOrWhiteSpace(apiKey))
+                throw new ArgumentNullException(nameof(apiKey), "ApiKey");
+
+            _apiKey = apiKey;
+        }
+
+
+
+        protected HttpRequestMessage CreateRequest(string endpoint, HttpMethod method, string query = null, bool checkApiKey = true)
+        {
+            if (string.IsNullOrWhiteSpace(_apiKey) && checkApiKey)
                 throw new BalikujException("Login is required to send data");
 
             var requestUrl = GetApiUrl(endpoint);
 
-            if (!string.IsNullOrEmpty(query))
+            if (!string.IsNullOrEmpty(query)) 
                 requestUrl += $"?{query}";
 
             var request = new HttpRequestMessage(method, requestUrl);
-            request.Headers.Add(BalikujSettings.ApiHeaderName, _apiKey);
+            
+            if (checkApiKey)
+            {
+                request.Headers.Add(BalikujSettings.ApiHeaderName, _apiKey);
+            }
 
             return request;
         }
