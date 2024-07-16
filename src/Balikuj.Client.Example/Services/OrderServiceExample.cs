@@ -39,10 +39,16 @@ namespace Balikuj.Client.Example.Services
             ////////////////////////
             /// Order list
             /////////////////////////
+            
+            var searchModel = new OrderSearchModel
+            {
+                PageSize = 50,
+                OrderNumber = "00023",
+            };
 
             
             Console.WriteLine("Getting orders ...");
-            var orderList = await _client.Order.List();
+            var orderList = await _client.Order.List(searchModel);
             Console.WriteLine($"OrderList StatusCode = {orderList.StatusCode}, items = {orderList?.Result?.Total}");
             
 

@@ -61,9 +61,17 @@ public class AddressServiceExample
         ////////////////////////
         // Get list of addresses
         ////////////////////////
+        ///
+
+        var addressListRequest = new AddressListRequest
+        {
+            PageSize = 20,
+            AddressType = AddressType.Billing,
+        };
+
         
         Console.WriteLine("Getting list of addresses ...");
-        var addressListResult = await _client.Address.List(new AddressListRequest());
+        var addressListResult = await _client.Address.List(addressListRequest);
         Console.WriteLine($"AddressList StatusCode = {addressListResult.StatusCode}, items = {addressListResult?.Result?.Data?.Count}");
         
 

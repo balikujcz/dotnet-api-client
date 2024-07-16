@@ -58,13 +58,13 @@ public class Program
             })
             .Build();
 
-        BalikujSettings.ApiBaseUrl = "https://api.balikuj.cz/api";
-
-        // Addresses example
-        //await host.Services.GetService<AddressServiceExample>()!.RunAsync();
+        BalikujSettings.ApiBaseUrl = "https://api.balikuj.cz/api";  
 
         // Account example
         //await host.Services.GetService<AccountServiceExample>()!.RunAsync();
+
+        // Addresses example
+        //await host.Services.GetService<AddressServiceExample>()!.RunAsync();
 
         // Webhook example
         //await host.Services.GetService<WebhookServiceExample>()!.RunAsync();

@@ -43,7 +43,7 @@ namespace Balikuj.Client.Clients.Package
         }
 
 
-        public async Task<ApiResult<PackageListResponse>> List(PackageSearchModel model = null)
+        public async Task<ApiResult<PackageListResponse>> List(PackageSearchModel model)
         {
             if (string.IsNullOrWhiteSpace(_apiKey))
                 throw new BalikujException("Account is not logged in, login is required");

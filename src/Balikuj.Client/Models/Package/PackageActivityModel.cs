@@ -21,17 +21,13 @@
 * THE SOFTWARE.
 */
 
+using Balikuj.Client.Models.Base;
 using System;
 
 namespace Balikuj.Client.Models.Package
 {
-    public class PackageActivityModel
+    public class PackageActivityModel : BaseEntityModel
     {
-        /// <summary>
-        /// Gets or sets the ID of the package activity.
-        /// </summary>
-        public int Id { get; set; }
-
         /// <summary>
         /// Gets or sets the date of the package activity.
         /// </summary>

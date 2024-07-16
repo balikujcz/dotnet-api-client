@@ -40,7 +40,7 @@ namespace Balikuj.Client.Example.Services
             ////////////////////////
             /// Package list
             /////////////////////////
-
+            
             var model = new PackageSearchModel
             {
                 PageSize = 50
@@ -48,7 +48,7 @@ namespace Balikuj.Client.Example.Services
 
             
             Console.WriteLine("Getting packages ...");
-            var packageList = await _client.Package.List();
+            var packageList = await _client.Package.List(model);
             Console.WriteLine($"PackageList StatusCode = {packageList.StatusCode}, items = {packageList?.Result?.Total}");
             
 
@@ -67,15 +67,15 @@ namespace Balikuj.Client.Example.Services
             ////////////////////////
             /// Package activity
             /////////////////////////
-
             
-            var model = new PackageActivitySearchModel
+            
+            var packageActivitySearchModel = new PackageActivitySearchModel
             {
                 Search = "1"
             };
            
             Console.WriteLine("Getting packages activity ...");
-            var packageActivity = await _client.Package.Activity(model);
+            var packageActivity = await _client.Package.Activity(packageActivitySearchModel);
             Console.WriteLine($"PackageActivity StatusCode = {packageActivity.StatusCode}, items = {packageActivity?.Result?.Total}");
             
 

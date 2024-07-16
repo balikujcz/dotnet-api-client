@@ -22,14 +22,40 @@
 */
 
 using Balikuj.Client.Models.Base;
+using System.Collections.Generic;
 
-namespace Balikuj.Client.Models.Package
+namespace Balikuj.Client.Models.Pickup
 {
-    public class PackageActivitySearchModel : BaseSearchModel
+    public class PickupSearchModel : BaseSearchModel
     {
         /// <summary>
-        /// Additional parameters for further search
-		/// </summary>
-        public string Search { get; set; }
+        /// Carrier codes
+        /// </summary>
+        /// <example>["DPD", "PPL"]</example>
+        public IList<string> CarrierCode { get; set; } = new List<string>();
+
+        /// <summary>
+        /// Date of creation from in the format YYYY-MM-DD
+        /// </summary>
+        /// <example>2024-01-10</example>
+        public string CreatedFrom { get; set; }
+
+        /// <summary>
+        /// Date of creation to in the format YYYY-MM-DD
+        /// </summary>
+        /// <example>2024-01-14</example>
+        public string CreatedTo { get; set; }
+
+        /// <summary>
+        /// Sort field name
+        /// </summary>
+        /// <example>created</example>
+        public string SortField { get; set; }
+
+        /// <summary>
+        /// Sort order
+        /// </summary>
+        /// <example>desc</example>
+        public string SortOrder { get; set; }
     }
 }

@@ -21,9 +21,11 @@
 * THE SOFTWARE.
 */
 
+using Balikuj.Client.Models.Base;
+
 namespace Balikuj.Client.Models.EmailTemplate
 {
-    public class MessageTemplateSearchModel
+    public class MessageTemplateSearchModel : BaseSearchModel
     {
         /// <summary>
         /// Search by name

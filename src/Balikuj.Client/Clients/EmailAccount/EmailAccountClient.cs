@@ -41,13 +41,18 @@ namespace Balikuj.Client.Clients.EmailAccount
             _apiKey = apiKey;
         }
 
-        public async Task<ApiResult<EmailAccountListModel>> List()
+        public async Task<ApiResult<EmailAccountListModel>> List(EmailAccountSearchModel model)
         {
             if (string.IsNullOrWhiteSpace(_apiKey))
                 throw new BalikujException("Account is not logged in, login is required");
 
+            if (model == null)
+            {
+                model = new EmailAccountSearchModel();
+            }
+
             var httpRequest = CreateRequest("EmailAccount/Find", HttpMethod.Post);
-            httpRequest.Content = new StringContent(JsonSerializer.Serialize(new { }), System.Text.Encoding.UTF8, "application/json");
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
 
             var httpResponse = await _httpClient.SendAsync(httpRequest);
 

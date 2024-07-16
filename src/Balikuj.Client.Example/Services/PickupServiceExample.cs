@@ -21,6 +21,8 @@
 * THE SOFTWARE.
 */
 
+using Balikuj.Client.Models.Pickup;
+
 namespace Balikuj.Client.Example.Services
 {
     public class PickupServiceExample
@@ -38,9 +40,14 @@ namespace Balikuj.Client.Example.Services
             /// Pickup List
             ////////////////////
 
+            var searchModel = new PickupSearchModel
+            {
+                PageSize = 50,
+                CarrierCode = new List<string> { "PPL" }
+            };
             
             Console.WriteLine("Getting pickup list  ...");
-            var pickup = await _client.Pickup.List();
+            var pickup = await _client.Pickup.List(searchModel);
             Console.WriteLine($"PickupList StatusCode = {pickup.StatusCode}, Items = {pickup?.Result?.Total}");
             
         }

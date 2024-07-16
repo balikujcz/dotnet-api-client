@@ -42,13 +42,18 @@ namespace Balikuj.Client.Clients.Rule
             _apiKey = apiKey;
         }
 
-        public async Task<ApiResult<RuleListResponse>> List()
+        public async Task<ApiResult<RuleListResponse>> List(RuleSearchModel model)
         {
             if (string.IsNullOrWhiteSpace(_apiKey))
                 throw new BalikujException("Account is not logged in, login is required");
 
+            if (model == null)
+            {
+                model = new RuleSearchModel();
+            }
+
             var httpRequest = CreateRequest("Rule/Find", HttpMethod.Post);
-            httpRequest.Content = new StringContent(JsonSerializer.Serialize(new { }), System.Text.Encoding.UTF8, "application/json");
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
 
             var httpResponse = await _httpClient.SendAsync(httpRequest);
 

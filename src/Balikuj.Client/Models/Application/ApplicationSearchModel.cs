@@ -23,13 +23,13 @@
 
 using Balikuj.Client.Models.Base;
 
-namespace Balikuj.Client.Models.Package
+namespace Balikuj.Client.Models.Application
 {
-    public class PackageActivitySearchModel : BaseSearchModel
+    public class ApplicationSearchModel : BaseSearchModel
     {
-        /// <summary>
-        /// Additional parameters for further search
-		/// </summary>
+        // Additional parameters for further searching
         public string Search { get; set; }
+
+        public int? ApplicationType { get; set; }
     }
 }

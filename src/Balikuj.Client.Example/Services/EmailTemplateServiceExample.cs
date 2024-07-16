@@ -40,9 +40,13 @@ namespace Balikuj.Client.Example.Services
             /// Email template find
             ///////////////////////
             
+            var searchModel = new MessageTemplateSearchModel
+            {
+                PageSize = 50
+            };
             
             Console.WriteLine("Finding email templates ...");
-            var emailTemplates = await _client.EmailTemplate.List();
+            var emailTemplates = await _client.EmailTemplate.List(searchModel);
             Console.WriteLine($"EmailTemplateList StatusCode = {emailTemplates.StatusCode}, result = {emailTemplates?.Result?.Total}");
             
 

@@ -22,34 +22,57 @@
 */
 
 using Balikuj.Client.Models.Base;
+using System.Collections.Generic;
 
-namespace Balikuj.Client.Models.Addresses
+namespace Balikuj.Client.Models.Order
 {
-    public class AddressListRequest : BaseSearchModel
+    public class OrderSearchModel : BaseSearchModel
     {
         /// <summary>
-        /// Searched string
+        /// Additional parameters for further searching
         /// </summary>
         public string Search { get; set; }
 
         /// <summary>
-        /// Address type
+        /// Order ID to search for
         /// </summary>
-        public AddressType? AddressType { get; set; }
+        public string OrderNumber { get; set; }
 
         /// <summary>
-        /// Show disabled/delete addresses
+        /// Shipment creation date from in YYYY-MM-DD format
         /// </summary>
-        public bool? ShowDisabled { get; set; } = false;
+        public string CreatedFrom { get; set; }
 
         /// <summary>
-        /// Name of the field to sort
+        /// Shipment creation date to in YYYY-MM-DD format
+        /// </summary>
+        public string CreatedTo { get; set; }
+
+        /// <summary>
+        /// Carrier codes for which we are searching for orders
+        /// </summary>
+        public List<string> CarrierCodes { get; set; }
+
+        /// <summary>
+        /// Column name for sorting
         /// </summary>
         public string SortField { get; set; }
 
         /// <summary>
-        /// Sort order
+        /// Display order
         /// </summary>
         public string SortOrder { get; set; }
+
+        /// <summary>
+        /// Application IDs for which we want to search for orders
+        /// </summary>
+        /// <example>10,12,30</example>
+        public List<int> Application { get; set; }
+
+        /// <summary>
+        /// Status IDs for filtering by status
+        /// </summary>
+        public List<int> Status { get; set; }
     }
 }
+

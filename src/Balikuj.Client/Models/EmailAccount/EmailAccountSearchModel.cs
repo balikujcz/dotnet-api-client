@@ -21,9 +21,11 @@
 * THE SOFTWARE.
 */
 
+using Balikuj.Client.Models.Base;
+
 namespace Balikuj.Client.Models.EmailAccount
 {
-    public class EmailAccountSearchModel
+    public class EmailAccountSearchModel : BaseSearchModel
     {
         /// <summary>
         /// Search by email address

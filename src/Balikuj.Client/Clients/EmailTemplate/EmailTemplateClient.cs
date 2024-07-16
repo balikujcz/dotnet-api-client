@@ -42,10 +42,15 @@ namespace Balikuj.Client.Clients.EmailTemplate
         }
 
 
-        public async Task<ApiResult<MessageTemplateListResponse>> List()
+        public async Task<ApiResult<MessageTemplateListResponse>> List(MessageTemplateSearchModel model)
         {
             if (string.IsNullOrWhiteSpace(_apiKey))
                 throw new BalikujException("Account is not logged in, login is required");
+
+            if (model == null)
+            {
+                model = new MessageTemplateSearchModel();
+            }
 
             var httpRequest = CreateRequest("EmailTemplate/Find", HttpMethod.Post);
             httpRequest.Content = new StringContent(JsonSerializer.Serialize(new { }), System.Text.Encoding.UTF8, "application/json");

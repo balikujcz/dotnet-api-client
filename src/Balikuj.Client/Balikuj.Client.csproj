@@ -11,7 +11,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>Balikuj,HttpClient</PackageTags>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<Version>1.0.1</Version>
+	<Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>

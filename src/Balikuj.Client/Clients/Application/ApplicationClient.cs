@@ -42,13 +42,18 @@ namespace Balikuj.Client.Clients.Application
             _apiKey = apiKey;
         }
 
-        public async Task<ApiResult<ApplicationListResponse>> List()
+        public async Task<ApiResult<ApplicationListResponse>> List(ApplicationSearchModel model)
         {
             if (string.IsNullOrWhiteSpace(_apiKey))
                 throw new BalikujException("Account is not logged in, login is required");
 
+            if (model == null)
+            {
+               model = new ApplicationSearchModel();
+            }
+
             var httpRequest = CreateRequest("Application/Find", HttpMethod.Post);
-            httpRequest.Content = new StringContent(JsonSerializer.Serialize(new { }), System.Text.Encoding.UTF8, "application/json");
+            httpRequest.Content = new StringContent(JsonSerializer.Serialize(model), System.Text.Encoding.UTF8, "application/json");
             var httpResponse = await _httpClient.SendAsync(httpRequest);
 
             var responseStream = await httpResponse.Content.ReadAsStreamAsync();

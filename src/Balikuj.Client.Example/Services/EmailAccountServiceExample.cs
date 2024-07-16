@@ -40,9 +40,13 @@ namespace Balikuj.Client.Example.Services
             /// Email list
             /////////////////////
             
+            var emailAccountSearchModel = new EmailAccountSearchModel
+            {
+                PageSize = 50
+            };
 
             Console.WriteLine("Getting email accounts ...");
-            var emailList = await _client.EmailAccount.List();
+            var emailList = await _client.EmailAccount.List(emailAccountSearchModel);
             Console.WriteLine($"EmailList StatusCode = {emailList.StatusCode}, count = {emailList?.Result?.Total}");
             
 

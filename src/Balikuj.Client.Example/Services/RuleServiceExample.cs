@@ -40,9 +40,15 @@ namespace Balikuj.Client.Example.Services
             /// Rule list
             //////////////
 
+            var searchModel = new RuleSearchModel
+            {
+                PageSize = 50,
+                RuleType = RuleType.Package
+            };
+
             
             Console.WriteLine("Getting rules ...");
-            var ruleList = await _client.Rule.List();
+            var ruleList = await _client.Rule.List(searchModel);
             Console.WriteLine($"RuleList StatusCode = {ruleList.StatusCode}, Count = {ruleList?.Result?.Total}");
             
             

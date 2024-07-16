@@ -43,11 +43,18 @@ namespace Balikuj.Client.Example.Services
             //// Application list
             ////////////////////////////
             
+
+            var searchModel = new ApplicationSearchModel()
+            {
+                PageSize = 50,
+                ApplicationType = 1
+            };
+            
             Console.WriteLine("Listing application ...");
-            var list = await _client.Application.List();
+            var list = await _client.Application.List(searchModel);
             Console.WriteLine($"ApplicationList StatusCode = {list.StatusCode}, items = {list?.Result?.Total}");
             
-
+            
             ////////////////////////////
             //// application get
             ////////////////////////////
@@ -245,7 +252,7 @@ namespace Balikuj.Client.Example.Services
             
             
 
-
+            
 
         }
     }

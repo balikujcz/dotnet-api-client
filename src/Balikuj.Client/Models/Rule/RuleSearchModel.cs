@@ -22,14 +22,19 @@
 */
 
 using Balikuj.Client.Models.Base;
+using System.ComponentModel;
 
-namespace Balikuj.Client.Models.Package
+namespace Balikuj.Client.Models.Rule
 {
-    public class PackageActivitySearchModel : BaseSearchModel
+    public class RuleSearchModel : BaseSearchModel
     {
         /// <summary>
-        /// Additional parameters for further search
+		/// Searched text
 		/// </summary>
-        public string Search { get; set; }
+		/// <example>text</example>
+		[DefaultValue(null)]
+        public string Search { get; set; } = null;
+
+        public RuleType? RuleType { get; set; }
     }
 }
