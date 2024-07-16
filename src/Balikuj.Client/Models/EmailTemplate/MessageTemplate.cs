@@ -21,14 +21,12 @@
 * THE SOFTWARE.
 */
 
+using Balikuj.Client.Models.Base;
+
 namespace Balikuj.Client.Models.EmailTemplate
 {
-    public class MessageTemplate
+    public class MessageTemplate : BaseEntityModel
     {
-        /// <summary>
-        /// Id of the email template
-        /// </summary>
-        public int Id { get; set; }
 
         /// <summary>
         /// Allowed tokens for the email template

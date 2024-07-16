@@ -22,13 +22,14 @@
 */
 
 using Balikuj.Client.Models.Addresses;
+using Balikuj.Client.Models.Base;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Balikuj.Client.Models.Order
 {
-    public class OrderModel
+    public class OrderModel : BaseEntityModel
     {
         /// <summary>
         /// Watch out, must be System.Text.Json, because Newtonsoft didn't work and put items into an array

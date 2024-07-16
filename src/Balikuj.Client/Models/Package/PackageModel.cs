@@ -22,6 +22,7 @@
 */
 
 using Balikuj.Client.Models.Addresses;
+using Balikuj.Client.Models.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,7 +30,7 @@ using System.Text.Json.Serialization;
 
 namespace Balikuj.Client.Models.Package
 {
-    public class Package
+    public class PackageModel : BaseEntityModel
     {
         [JsonExtensionData] // Warning: Must use System.Text.Json as Newtonsoft didn't work and put items into an array
         public Dictionary<string, object> AdditionalProperties { get; set; } = new Dictionary<string, object>();

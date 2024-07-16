@@ -21,14 +21,12 @@
 * THE SOFTWARE.
 */
 
+using Balikuj.Client.Models.Base;
+
 namespace Balikuj.Client.Models.Webhooks
 {
-    public class WebhookUpdateModel
+    public class WebhookUpdateModel : BaseEntityModel
     {
-        /// <summary>
-        /// ID of the record
-		/// </summary>
-        public int Id { get; set; }
 
         /// <summary>
         /// URL address 

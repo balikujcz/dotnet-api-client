@@ -21,12 +21,13 @@
 * THE SOFTWARE.
 */
 
+using Balikuj.Client.Models.Base;
 using System;
 using System.Collections.Generic;
 
 namespace Balikuj.Client.Models.Rule
 {
-    public class RuleModel
+    public class RuleModel : BaseEntityModel
     {
         public RuleType Type { get; set; }
 

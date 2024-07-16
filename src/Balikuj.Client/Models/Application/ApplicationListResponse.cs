@@ -26,7 +26,7 @@ using Balikuj.Client.Models.Base;
 
 namespace Balikuj.Client.Models.Application
 {
-    public class ApplicationListResponse : PagedResponse<Application>
+    public class ApplicationListResponse : PagedResponse<ApplicationModel>
     {
     }
 }

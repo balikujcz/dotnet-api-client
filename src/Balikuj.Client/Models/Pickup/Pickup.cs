@@ -21,11 +21,12 @@
 * THE SOFTWARE.
 */
 
+using Balikuj.Client.Models.Base;
 using System;
 
 namespace Balikuj.Client.Models.Pickup
 {
-    public class Pickup
+    public class Pickup : BaseEntityModel
     {
         /// <summary>
         /// Unique hash for printing

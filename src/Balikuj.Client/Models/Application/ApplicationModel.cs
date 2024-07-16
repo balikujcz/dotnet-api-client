@@ -21,13 +21,14 @@
 * THE SOFTWARE.
 */
 
+using Balikuj.Client.Models.Base;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Balikuj.Client.Models.Application
 {
-    public class ApplicationModel
+    public class ApplicationModel : BaseEntityModel
     {
         public ApplicationTypeModel Type { get; set; }
 

@@ -21,12 +21,12 @@
 * THE SOFTWARE.
 */
 
+using Balikuj.Client.Models.Base;
+
 namespace Balikuj.Client.Models.Application
 {
-    public class ApplicationTypeModel
+    public class ApplicationTypeModel : BaseEntityModel
     {
-        public int Id { get; set; }
-
         /// <summary>
         /// Unique code of the application
         /// </summary>

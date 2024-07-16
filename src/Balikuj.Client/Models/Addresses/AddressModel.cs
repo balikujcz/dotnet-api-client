@@ -21,12 +21,12 @@
 * THE SOFTWARE.
 */
 
+using Balikuj.Client.Models.Base;
+
 namespace Balikuj.Client.Models.Addresses
 {
-    public class AddressModel
+    public class AddressModel : BaseEntityModel
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public string Company { get; set; }

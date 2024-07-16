@@ -25,7 +25,7 @@ using Balikuj.Client.Models.Base;
 
 namespace Balikuj.Client.Models.Package
 {
-    public class PackageListResponse : PagedResponse<Package>
+    public class PackageListResponse : PagedResponse<PackageModel>
     {
 
     }

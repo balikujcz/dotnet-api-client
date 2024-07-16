@@ -21,11 +21,12 @@
 * THE SOFTWARE.
 */
 
+using Balikuj.Client.Models.Base;
 using System;
 
 namespace Balikuj.Client.Models.Printer
 {
-    public class PrinterModel
+    public class PrinterModel : BaseEntityModel
     {
         /// <summary>
         /// Hostname of the computer

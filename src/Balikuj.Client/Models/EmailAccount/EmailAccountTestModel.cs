@@ -21,15 +21,12 @@
 * THE SOFTWARE.
 */
 
+using Balikuj.Client.Models.Base;
+
 namespace Balikuj.Client.Models.EmailAccount
 {
-    public class EmailAccountTestModel
+    public class EmailAccountTestModel : BaseEntityModel
     {
-        /// <summary>
-        /// Id of the email account
-        /// </summary>
-        public int Id { get; set; }
-
         /// <summary>
         /// Email address of the recipient
         /// </summary>

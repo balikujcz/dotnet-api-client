@@ -21,14 +21,12 @@
 * THE SOFTWARE.
 */
 
+using Balikuj.Client.Models.Base;
+
 namespace Balikuj.Client.Models.Application
 {
-    public class ApplicationCarrierModel
+    public class ApplicationCarrierModel : BaseEntityModel
     {
-        /// <summary>
-		/// ID of order status
-		/// </summary>
-		public int Id { get; set; }
 
         /// <summary>
         /// ID of the application to which the status belongs

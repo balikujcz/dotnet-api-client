@@ -41,6 +41,11 @@ namespace Balikuj.Client.Example.Services
             /// Package list
             /////////////////////////
 
+            var model = new PackageSearchModel
+            {
+                PageSize = 50
+            };
+
             
             Console.WriteLine("Getting packages ...");
             var packageList = await _client.Package.List();

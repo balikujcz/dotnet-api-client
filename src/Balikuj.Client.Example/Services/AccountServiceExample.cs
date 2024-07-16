@@ -46,7 +46,7 @@ namespace Balikuj.Client.Example.Services
             var loginModel = new AccountLoginRequest
             {
                 Email = "info@email.cz",
-                Password = "pass",
+                Password = "test",
                 Language = "cs-CZ",
                 Code = null
             };
